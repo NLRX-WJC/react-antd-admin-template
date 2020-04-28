@@ -1,59 +1,64 @@
-.login {
-  width: 100%;
+.login-container {
   height: 100%;
+  overflow: hidden;
+  position: relative;
   background-image: url("~@/assets/images/bg.jpg");
   background-size: 100% 100%;
-  .login-header {
-    display: flex;
-    align-items: center;
-    height: 80px;
-    background-color: rgba(21, 20, 13, 0.5);
-    img {
-      width: 40px;
-      height: 40px;
-      margin: 0 15px 0 50px;
-    }
-    h1 {
-      font-size: 30px;
-      color: white;
-    }
+  & > .title {
+    color: #eee;
+    font-size: 26px;
+    font-weight: 400;
+    margin: 0px auto 30px auto;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
   }
-
-  .login-content {
-    position: relative;
-    width: 400px;
-    height: 300px;
+  .spin-wrap {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    line-height: 90vh;
+    z-index: 999;
+  }
+  .content {
+    position: absolute;
     background-color: #fff;
-    margin: 50px auto;
-    padding: 20px 40px;
-    .error-msg {
-      visibility: hidden;
-      position: absolute;
-      top: 0;
-      left: 0;
+    left: 50%;
+    top: 50%;
+    width: 320px;
+    padding: 30px 30px 0 30px;
+    transform: translate(-50%, -60%);
+    box-shadow: 0 0 10px 2px rgba(40, 138, 204, 0.16);
+    border-radius: 3px;
+
+    .title {
       text-align: center;
-      height: 30px;
+      margin: 0 0 30px 0;
+    }
+    .two-button-wrap {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .row-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .user-type-button {
+      width: 45%;
+    }
+
+    .login-form-button {
       width: 100%;
-      background: #f60c1a;
-      color: #ffffff;
-      font-size: 16px;
-      transform: translateY(-30px);
-      transition: all .3s;
-      &.show {
-        visibility: visible;
-        transform: translateY(0);
-      }
     }
-    h2 {
-      text-align: center;
-      font-size: 30px;
-      font-weight:bold;
-      margin-bottom: 20px;
-    }
-    .login-form {
-      .login-form-button {
-        width: 100%;
-      }
+    .login-form-forgot {
+      float: right;
     }
   }
 }

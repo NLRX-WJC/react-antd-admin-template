@@ -7,7 +7,7 @@ const initUserInfo = {
 };
 export default function user(state = initUserInfo, action) {
   switch (action.type) {
-    case types.USER_SET_TOKEN:
+    case types.USER_SET_USER_TOKEN:
       return {
         ...state,
         token: action.token

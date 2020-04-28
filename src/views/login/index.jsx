@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Form, Icon, Input, Button } from "antd";
+import { Form, Icon, Input, Button, message, Spin } from "antd";
 import { connect } from "react-redux";
-
 import "./index.less";
-// import logo from "../../assets/images/logo.png";
-import { login } from "@/store/actionCreator/auth";
+import { login, getUserInfo } from "@/store/actions";
+const Item = Form.Item;
 
-const Item = Form.Item; // 不能写在import之前
-
-/*
-登陆的路由组件
- */
 class Login extends Component {
+  state = {
+    loading: false,
+  };
   handleSubmit = (event) => {
     // 阻止事件的默认行为
     event.preventDefault();
@@ -21,16 +18,38 @@ class Login extends Component {
     this.props.form.validateFields(async (err, values) => {
       // 检验成功
       if (!err) {
-        // console.log('提交登陆的ajax请求', values)
-        // 请求登陆
         const { username, password } = values;
-        
-        // 调用分发异步action的函数 => 发登陆的异步请求, 有了结果后更新状态
-        this.props.login(username, password);
+        this.login(username, password);
       } else {
         console.log("检验失败!");
       }
     });
+  };
+  login = (username, password) => {
+    const { login } = this.props;
+    // 登录完成后 发送请求 调用接口获取用户信息
+    this.setState({ loading: true });
+    login(username, password)
+      .then((data) => {
+        // this.setState({ loading: false });
+        message.success("登录成功");
+        this.getUserInfo(data.token);
+      })
+      .catch((error) => {
+        this.setState({ loading: false });
+        message.error(error);
+      });
+  };
+  // 获取用户信息
+  getUserInfo = (token) => {
+    const { getUserInfo } = this.props;
+    getUserInfo(token)
+      .then((data) => {
+        localStorage.setItem("userInfo", JSON.stringify(data.userInfo));
+      })
+      .catch((error) => {
+        message.error(error);
+      });
   };
 
   /*
@@ -61,30 +80,21 @@ class Login extends Component {
 
   render() {
     // 如果用户已经登陆, 自动跳转到管理界面
-    const {token}  = this.props
+    const { token } = this.props;
     if (token) {
       return <Redirect to="/home" />;
     }
 
-    // 得到具强大功能的form对象
-    const form = this.props.form;
-    const { getFieldDecorator } = form;
+    const { getFieldDecorator } = this.props.form;
 
     return (
-      <div className="login">
-        <header className="login-header">
-          {/* <img src={logo} alt="logo" /> */}
-          <h1>React项目: 后台管理系统</h1>
-        </header>
-        <section className="login-content">
-          {/* <div className={user.errorMsg ? "error-msg show" : "error-msg"}>
-            {user.errorMsg}
-          </div> */}
-          <h2>用户登陆</h2>
-          <Form onSubmit={this.handleSubmit} className="login-form">
-            <Item>
+      <div className="login-container">
+        <Form onSubmit={this.handleSubmit} className="content">
+          <div className="title"><h2>用户登录</h2></div>
+          <Spin spinning={this.state.loading} tip="加载中...">
+            <Form.Item>
               {/*
-              用户名/密码的的合法性要求
+                  用户名/密码的的合法性要求
                 1). 必须输入
                 2). 必须大于等于4位
                 3). 必须小于等于12位
@@ -115,7 +125,7 @@ class Login extends Component {
                   placeholder="用户名"
                 />
               )}
-            </Item>
+            </Form.Item>
             <Form.Item>
               {getFieldDecorator("password", {
                 rules: [
@@ -140,11 +150,11 @@ class Login extends Component {
                 htmlType="submit"
                 className="login-form-button"
               >
-                登陆
+                登录
               </Button>
             </Form.Item>
-          </Form>
-        </section>
+          </Spin>
+        </Form>
       </div>
     );
   }
@@ -152,4 +162,6 @@ class Login extends Component {
 
 const WrapLogin = Form.create()(Login);
 
-export default connect(state => state.user, { login })(WrapLogin);
+export default connect((state) => state.user, { login, getUserInfo })(
+  WrapLogin
+);

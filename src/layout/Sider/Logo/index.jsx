@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.less";
-function Logo() {
+const Logo = () => {
   return (
     <div className="sidebar-logo-container">
       <img
@@ -11,6 +11,6 @@ function Logo() {
       <h1 className="sidebar-title">难凉热血</h1>
     </div>
   );
-}
+};
 
 export default Logo;

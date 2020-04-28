@@ -1,19 +1,6 @@
 const tokens = {
-  admin: 'admin-token',
-  editor:  'editor-token'
-}
-
-const users = {
-  admin: {
-    role: "admin",
-    name: "难凉热血",
-    token: "admin-token",
-  },
-  editor: {
-    role: "editor",
-    name: "Normal Editor",
-    token: "editor-token",
-  },
+  admin: "admin-token",
+  editor: "editor-token",
 };
 
 export default {
@@ -28,7 +15,7 @@ export default {
     }
     return {
       status: 0,
-      data: token,
+      token,
     };
   },
   logout: (_) => {
