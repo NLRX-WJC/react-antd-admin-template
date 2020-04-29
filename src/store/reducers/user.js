@@ -3,6 +3,7 @@ import { getToken } from "@/utils/auth";
 const initUserInfo = {
   name: "",
   role: "",
+  avatar:"",
   token: getToken(),
 };
 export default function user(state = initUserInfo, action) {
@@ -17,6 +18,7 @@ export default function user(state = initUserInfo, action) {
         ...state,
         name: action.name,
         role: action.role,
+        avatar: action.avatar,
       };
     case types.USER_RESET_USER:
       return {};

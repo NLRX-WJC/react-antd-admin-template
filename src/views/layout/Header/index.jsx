@@ -7,7 +7,7 @@ import "./index.less";
 const { Header } = Layout;
 
 const LayoutHeader = (props) => {
-  const { token, sidebarCollapsed, logout, getUserInfo,toggleSiderBar } = props;
+  const { token, avatar,sidebarCollapsed, logout, getUserInfo,toggleSiderBar } = props;
   token && getUserInfo(token);
   const handleLogout = (token) => {
     Modal.confirm({
@@ -32,7 +32,7 @@ const LayoutHeader = (props) => {
   const menu = (
     <Menu onClick={onClick}>
       <Menu.Item key="0">
-        <Link to="/home">首页</Link>
+        <Link to="/dashboard">首页</Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="logout">注销</Menu.Item>
@@ -52,7 +52,7 @@ const LayoutHeader = (props) => {
             <div>
               <Avatar
                 size="large"
-                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                src={avatar}
               />
               <Icon style={{ color: "rgba(0,0,0,.3)" }} type="caret-down" />
             </div>

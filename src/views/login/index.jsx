@@ -4,7 +4,6 @@ import { Form, Icon, Input, Button, message, Spin } from "antd";
 import { connect } from "react-redux";
 import "./index.less";
 import { login, getUserInfo } from "@/store/actions";
-const Item = Form.Item;
 
 class Login extends Component {
   state = {
@@ -63,7 +62,6 @@ class Login extends Component {
      4). 必须是英文、数字或下划线组成
     */
   validatePwd = (rule, value, callback) => {
-    console.log("validatePwd()", rule, value);
     if (!value) {
       callback("密码必须输入");
     } else if (value.length < 4) {
@@ -75,14 +73,13 @@ class Login extends Component {
     } else {
       callback(); // 验证通过
     }
-    // callback('xxxx') // 验证失败, 并指定提示的文本
   };
 
   render() {
     // 如果用户已经登陆, 自动跳转到管理界面
     const { token } = this.props;
     if (token) {
-      return <Redirect to="/home" />;
+      return <Redirect to="/dashboard" />;
     }
 
     const { getFieldDecorator } = this.props.form;

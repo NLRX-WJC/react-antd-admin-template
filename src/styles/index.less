@@ -96,10 +96,13 @@ div:focus {
 .fade-enter-active,
 .fade-exit-active {
   transform: translateX(0);
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .fade-exit {
   opacity: 0;
   transform: translateX(30px);
+}
+.ant-layout-content {
+  min-height: calc(100% - 64px);
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import App from "@/App";
-import Layout from "@/layout";
+import Layout from "@/views/layout";
 import Login from "@/views/login";
 class Router extends React.Component {
   render() {

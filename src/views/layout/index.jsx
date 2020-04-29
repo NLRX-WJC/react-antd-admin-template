@@ -13,7 +13,7 @@ const Main = (props) => {
     return <Redirect to="/login" />;
   }
   return (
-    <Layout>
+    <Layout style={{ minHeight: '100vh' }}>
       <Sider />
       <Layout>
         <Header />
