@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Icon, Menu, Dropdown, Modal, Layout, Avatar } from "antd";
 import { Link } from "react-router-dom";
 import { logout, getUserInfo, toggleSiderBar } from "@/store/actions";
+import FullScreen from '@/components/FullScreen'
 import "./index.less";
 const { Header } = Layout;
 
@@ -46,12 +47,15 @@ const LayoutHeader = (props) => {
         </div>
         
       </div>
+      
       <div className="right-menu">
+        <FullScreen/>
         <div className="dropdown-wrap">
           <Dropdown overlay={menu}>
             <div>
               <Avatar
-                size="large"
+                shape="square"
+                size="medium"
                 src={avatar}
               />
               <Icon style={{ color: "rgba(0,0,0,.3)" }} type="caret-down" />

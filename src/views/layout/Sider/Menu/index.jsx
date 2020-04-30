@@ -7,7 +7,7 @@ const SubMenu = Menu.SubMenu;
 class Meun extends Component {
   state = {
     menuTreeNode: null,
-    openKey: "",
+    openKey: [],
   };
 
   // filterMenuItem用来根据配置信息筛选可以显示的菜单项
@@ -26,7 +26,6 @@ class Meun extends Component {
   getMenuNodes = (menuList) => {
     // 得到当前请求的路由路径
     const path = this.props.location.pathname;
-
     return menuList.reduce((pre, item) => {
       if (this.filterMenuItem(item)) {
         if (!item.children) {
@@ -54,9 +53,11 @@ class Meun extends Component {
           );
           // 如果存在, 说明当前item的子列表需要打开
           if (cItem) {
-            this.setState({
-              openKey: item.path,
-            });
+            this.setState((state) => (
+              {
+                openKey: [...state.openKey,item.path]
+              }
+            ));
           }
 
           // 向pre添加<SubMenu>
@@ -94,7 +95,7 @@ class Meun extends Component {
         mode="inline"
         theme="dark"
         selectedKeys={[path]}
-        defaultOpenKeys={[openKey]}
+        defaultOpenKeys={openKey}
       >
         {this.state.menuTreeNode}
       </Menu>

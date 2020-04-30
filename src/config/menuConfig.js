@@ -10,10 +10,14 @@ const menuList = [
     roles: ["admin"],
   },
   {
+    title: "文档",
+    path: "/doc",
+    icon: "file"
+  },
+  {
     title: "图表",
     path: "/charts",
     icon: "area-chart",
-    roles: ["admin"],
     children: [
       {
         title: "键盘图表",
@@ -30,10 +34,31 @@ const menuList = [
     ],
   },
   {
-    title: "文档",
-    path: "/doc",
-    icon: "home",
-    roles: ["aaa"]
+    title: "路由嵌套",
+    path: "/nested",
+    icon: "cluster",
+    children: [
+      {
+        title: "菜单1",
+        path: "/nested/menu1",
+        children: [
+          {
+            title: "菜单1-1",
+            path: "/nested/menu1/menu1-1",
+          },
+          {
+            title: "菜单1-2",
+            path: "/nested/menu1/menu1-2",
+            children: [
+              {
+                title: "菜单1-2-1",
+                path: "/nested/menu1/menu1-2/menu1-2-1",
+              },
+            ]
+          },
+        ]
+      },
+    ]
   },
 ];
 export default menuList;

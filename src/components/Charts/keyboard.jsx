@@ -10,7 +10,6 @@ class KeyboardChart extends Component {
     height: PropTypes.string,
     className: PropTypes.string,
     styles: PropTypes.object,
-    chartData: PropTypes.object,
   };
   static defaultProps = {
     width: "100%",
