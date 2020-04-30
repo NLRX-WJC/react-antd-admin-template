@@ -51,6 +51,7 @@ class Home extends Component {
           }}
         />
 
+        
         <Row gutter={32}>
           <Col xs={24} sm={24} lg={8}>
             <div className="chart-wrapper">
@@ -68,10 +69,11 @@ class Home extends Component {
             </div>
           </Col>
         </Row>
+        
 
         <Row gutter={8}>
           <Col xs={24} sm={24} md={24} lg={12} xl={12} style={{paddingRight:"8px",marginBottom:"30px"}}>
-            <TransactionTable/>
+            <TransactionTable />
           </Col>
           <Col xs={24} sm={24} md={24} lg={12} xl={12} style={{marginBottom:"30px"}}>
             <BoxCard/>

@@ -7,24 +7,18 @@ const SubMenu = Menu.SubMenu;
 class Meun extends Component {
   state = {
     menuTreeNode: null,
+    openKey: "",
   };
 
   // filterMenuItem用来根据配置信息筛选可以显示的菜单项
   filterMenuItem = (item) => {
-    const {
-      meta: { roles },
-    } = item;
-    const role =
-      localStorage.getItem("userInfo") &&
-      JSON.parse(localStorage.getItem("userInfo")).role;
-    const name =
-      localStorage.getItem("userInfo") &&
-      JSON.parse(localStorage.getItem("userInfo")).name;
+    const { roles } = item;
+    const { role, name } = this.props;
     if (name === "admin" || !roles || roles.includes(role)) {
       return true;
     } else if (item.children) {
       // 如果当前用户有此item的某个子item的权限
-      return !!item.children.find((child) => roles.includes(child.meta.role));
+      return !!item.children.find((child) => roles.includes(child.role));
     }
     return false;
   };
@@ -48,7 +42,7 @@ class Meun extends Component {
                 to={item.path}
                 // onClick={() => this.props.setHeadTitle(item.title)}
               >
-                <Icon type={item.meta.icon} />
+                {item.icon ? <Icon type={item.icon} /> : null}
                 <span>{item.title}</span>
               </Link>
             </Menu.Item>
@@ -60,7 +54,9 @@ class Meun extends Component {
           );
           // 如果存在, 说明当前item的子列表需要打开
           if (cItem) {
-            this.openKey = item.path;
+            this.setState({
+              openKey: item.path,
+            });
           }
 
           // 向pre添加<SubMenu>
@@ -69,7 +65,7 @@ class Meun extends Component {
               key={item.path}
               title={
                 <span>
-                  <Icon type={item.meta.icon} />
+                  {item.icon ? <Icon type={item.icon} /> : null}
                   <span>{item.title}</span>
                 </span>
               }
@@ -83,6 +79,7 @@ class Meun extends Component {
       return pre;
     }, []);
   };
+
   componentWillMount() {
     const menuTreeNode = this.getMenuNodes(menuList);
     this.setState({
@@ -90,8 +87,8 @@ class Meun extends Component {
     });
   }
   render() {
-    let path = this.props.location.pathname;
-    const openKey = this.openKey;
+    const path = this.props.location.pathname;
+    const openKey = this.state.openKey;
     return (
       <Menu
         mode="inline"
@@ -105,4 +102,4 @@ class Meun extends Component {
   }
 }
 
-export default connect((state) => state.user, {})(withRouter(Meun));
+export default connect((state) => state.user)(withRouter(Meun));

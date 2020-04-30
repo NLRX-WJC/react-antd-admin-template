@@ -1,22 +1,26 @@
 import React from "react";
 import { Redirect, withRouter, Route, Switch } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { connect } from "react-redux";
 import { Layout } from "antd";
 import routeList from "@/config/routeMap";
 const { Content } = Layout;
-const Main = ({ location }) => {
+const LayoutContent = (props) => {
   const handleFilter = (route) => {
     // 过滤没有权限的页面
-    const role =
-      localStorage.getItem("userInfo") &&
-      JSON.parse(localStorage.getItem("userInfo")).role;
+    const { role } = props;
     return !route.roles || route.roles.includes(role);
   };
   return (
-    <Content style={{ margin: "24px 16px" }}>
+    <Content style={{ margin: "64px 16px 24px 16px" }}>
       <TransitionGroup>
-        <CSSTransition classNames="fade" key={location.pathname} timeout={500}>
+        <CSSTransition
+          classNames="fade"
+          key={props.location.pathname}
+          timeout={500}
+        >
           <Switch>
+            <Redirect exact from="/" to="/dashboard" />
             {routeList.map((route) => {
               return (
                 handleFilter(route) && (
@@ -28,7 +32,8 @@ const Main = ({ location }) => {
                 )
               );
             })}
-            <Redirect from="/" to="/error/404" />
+
+            <Redirect to="/error/404" />
           </Switch>
         </CSSTransition>
       </TransitionGroup>
@@ -36,4 +41,4 @@ const Main = ({ location }) => {
   );
 };
 
-export default withRouter(Main);
+export default connect((state) => state.user)(withRouter(LayoutContent));

@@ -13,7 +13,7 @@ class Mallki extends Component {
   render() {
     const { className, text } = this.props;
     return (
-      <a className={`mallki ${className}`} href="#/dashboard">
+      <a className={`mallki ${className}`} href="#/">
         {text}
         <span data-letters={text} />
         <span data-letters={text} />

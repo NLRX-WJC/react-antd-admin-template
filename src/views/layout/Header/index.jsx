@@ -39,7 +39,7 @@ const LayoutHeader = (props) => {
     </Menu>
   );
   return (
-    <Header style={{ background: "#fff" }}>
+    <Header style={sidebarCollapsed?{ width: "calc(100% - 80px)" }:{width: "calc(100% - 200px)"}}>
       <div className="left-menu">
         <div className="trigger-wrap">
           <Icon type={sidebarCollapsed ? "menu-unfold" : "menu-fold"} onClick={toggleSiderBar}/>

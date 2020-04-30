@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
-import echarts from "echarts";
+import echarts from "@/lib/echarts";
 import { debounce } from "@/utils";
-require("echarts/theme/macarons"); // echarts theme
 
 class RaddarChart extends Component {
   static propTypes = {

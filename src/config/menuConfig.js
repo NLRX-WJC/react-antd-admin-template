@@ -6,26 +6,34 @@ const menuList = [
   {
     title: "首页",
     path: "/dashboard",
-    meta: {
-      icon: "home",
-      roles: ["admin"],
-    },
+    icon: "home",
+    roles: ["admin"],
+  },
+  {
+    title: "图表",
+    path: "/charts",
+    icon: "area-chart",
+    roles: ["admin"],
+    children: [
+      {
+        title: "键盘图表",
+        path: "/charts/keyboard",
+      },
+      {
+        title: "折线图",
+        path: "/charts/line",
+      },
+      {
+        title: "混合图表",
+        path: "/charts/mix-chart",
+      },
+    ],
   },
   {
     title: "文档",
     path: "/doc",
-    meta: {
-      icon: "home",
-    },
-    children: [
-      {
-        title: "404",
-        path: "/error/404",
-        meta: {
-          icon: "home",
-        },
-      },
-    ]
+    icon: "home",
+    roles: ["aaa"]
   },
 ];
 export default menuList;

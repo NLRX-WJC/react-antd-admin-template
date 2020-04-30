@@ -1,25 +1,33 @@
-.left-menu {
-  float: left;
-  .trigger-wrap {
-    font-size: 20px;
-    line-height: 64px;
-    cursor: pointer;
-    margin-left: -30px;
-  }
-}
-.right-menu {
-  float: right;
-  .dropdown-wrap {
-    cursor: pointer;
-    .ant-dropdown-menu-item {
-      padding: 6px 20px 8px 15px;
-      i {
-        padding-right: 15px;
-      }
+.ant-layout-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  background: #fff !important;
+  transition: width .2s;
+  .left-menu {
+    float: left;
+    .trigger-wrap {
+      font-size: 20px;
+      line-height: 64px;
+      cursor: pointer;
+      margin-left: -30px;
     }
-    .anticon-caret-down {
-      vertical-align: bottom;
-      padding: 0 0 12px 6px;
+  }
+  .right-menu {
+    float: right;
+    .dropdown-wrap {
+      cursor: pointer;
+      .ant-dropdown-menu-item {
+        padding: 6px 20px 8px 15px;
+        i {
+          padding-right: 15px;
+        }
+      }
+      .anticon-caret-down {
+        vertical-align: bottom;
+        padding: 0 0 12px 6px;
+      }
     }
   }
 }

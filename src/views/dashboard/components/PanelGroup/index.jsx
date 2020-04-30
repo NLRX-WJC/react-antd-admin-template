@@ -44,6 +44,7 @@ const PanelGroup = (props) => {
             <div className="card-panel">
               <div className="card-panel-icon-wrapper">
                 <Icon
+                  className={chart.type}
                   style={{ fontSize: 55, color: chart.color }}
                   type={chart.icon}
                 />

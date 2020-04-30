@@ -9,7 +9,7 @@ import "./index.less";
  */
 class NotFound extends Component {
   goHome = () => {
-    this.props.history.replace("/dashboard");
+    this.props.history.replace("/");
   };
 
   render() {
