@@ -15,6 +15,17 @@ const menuList = [
     icon: "file"
   },
   {
+    title: "组件",
+    path: "/components",
+    icon: "appstore",
+    children: [
+      {
+        title: "回到顶部",
+        path: "/components/back-to-top",
+      },
+    ]
+  },
+  {
     title: "图表",
     path: "/charts",
     icon: "area-chart",

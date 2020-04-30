@@ -7,11 +7,7 @@ class FullScreen extends Component {
     isFullscreen: false,
   };
   init = () => {
-    console.log(screenfull.isEnabled);
-
     if (screenfull.isEnabled) {
-      console.log('1111');
-      
       screenfull.on("change", this.change);
     }
   };
