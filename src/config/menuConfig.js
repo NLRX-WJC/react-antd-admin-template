@@ -71,5 +71,10 @@ const menuList = [
       },
     ]
   },
+  {
+    title: "表格",
+    path: "/table",
+    icon: "table"
+  },
 ];
 export default menuList;
