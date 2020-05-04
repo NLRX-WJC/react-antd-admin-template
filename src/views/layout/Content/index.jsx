@@ -16,20 +16,20 @@ const LayoutContent = (props) => {
   };
 
   function getPageTitle(menuList, pathname) {
-    let stark = [];
-    let title = 'Ant Design Pro';
-    stark = stark.concat(menuList);
+    let stack = [];
+    let title = "Ant Design Pro";
+    stack = stack.concat(menuList);
 
-    while (stark.length) {
-      var temp = stark.shift();
-      if (temp.children) {
-        stark = temp.children.concat(stark);
+    while (stack.length) {
+      let cur = stack.shift();
+      if (cur.children && cur.children.length > 0) {
+        stack = cur.children.concat(stack);
       }
-      if (pathname === temp.path) {
-        title = `${temp.title} - Ant Design Pro`;
+      if (pathname === cur.path) {
+        title = `${cur.title} - Ant Design Pro`;
       }
     }
-    return title
+    return title;
   }
 
   console.log(getPageTitle(menuList, pathname));
