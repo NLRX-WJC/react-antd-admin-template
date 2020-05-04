@@ -33,7 +33,7 @@ class FullScreen extends Component {
   }
   render() {
     return (
-      <div className="fullScreen-container">
+      <div className="fullScreen-container" id="fullScreen-container">
         {this.state.isFullscreen ? (
           <Icon type="fullscreen-exit" onClick={this.click} />
         ) : (

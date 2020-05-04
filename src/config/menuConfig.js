@@ -15,6 +15,11 @@ const menuList = [
     icon: "file"
   },
   {
+    title: "引导页",
+    path: "/guide",
+    icon: "key"
+  },
+  {
     title: "组件",
     path: "/components",
     icon: "appstore",

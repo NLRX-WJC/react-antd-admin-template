@@ -1,5 +1,6 @@
 import Dashboard from "@/views/dashboard";
 import Doc from "@/views/doc";
+import Guide from "@/views/guide";
 import BackToTop from "@/views/components-demo/backToTop.jsx";
 import KeyboardChart from "@/views/charts/keyboard";
 import LineChart from "@/views/charts/line";
@@ -12,6 +13,7 @@ import Error404 from '@/views/error/404'
 export default [
   { path: "/dashboard", component: Dashboard, roles: ["admin"] },
   { path: "/doc", component: Doc, roles: ["admin"] },
+  { path: "/guide", component: Guide, roles: ["admin"] },
   { path: "/components/back-to-top", component: BackToTop, roles: ["admin"] },
   { path: "/charts/keyboard", component: KeyboardChart, roles: ["admin"] },
   { path: "/charts/line", component: LineChart, roles: ["admin"] },

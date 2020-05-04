@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^3.17.0",
     "axios": "^0.19.2",
+    "driver.js": "^0.9.8",
     "echarts": "^4.7.0",
     "js-cookie": "^2.2.1",
     "less": "^3.9.0",

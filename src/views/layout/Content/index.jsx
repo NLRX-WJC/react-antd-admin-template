@@ -32,7 +32,6 @@ const LayoutContent = (props) => {
     return title;
   }
 
-  console.log(getPageTitle(menuList, pathname));
   return (
     <DocumentTitle title={getPageTitle(menuList, pathname)}>
       <Content style={{ margin: "64px 16px 24px 16px" }}>
