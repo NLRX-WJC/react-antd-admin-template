@@ -9,4 +9,3 @@ class Table extends Component {
 }
  
 export default Table;
-<h1>table</h1>

@@ -2,13 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { Icon, Menu, Dropdown, Modal, Layout, Avatar } from "antd";
 import { Link } from "react-router-dom";
-import { logout, getUserInfo, toggleSiderBar } from "@/store/actions";
+import { logout, getUserInfo } from "@/store/actions";
 import FullScreen from '@/components/FullScreen'
+import Hamburger from '@/components/Hamburger'
 import "./index.less";
 const { Header } = Layout;
 
 const LayoutHeader = (props) => {
-  const { token, avatar,sidebarCollapsed, logout, getUserInfo,toggleSiderBar } = props;
+  const { token, avatar,sidebarCollapsed, logout, getUserInfo } = props;
   token && getUserInfo(token);
   const handleLogout = (token) => {
     Modal.confirm({
@@ -42,12 +43,8 @@ const LayoutHeader = (props) => {
   return (
     <Header style={sidebarCollapsed?{ width: "calc(100% - 80px)" }:{width: "calc(100% - 200px)"}}>
       <div className="left-menu">
-        <div id="hamburger-container" className="hamburger-container">
-          <Icon type={sidebarCollapsed ? "menu-unfold" : "menu-fold"} onClick={toggleSiderBar}/>
-        </div>
-        
+        <Hamburger/>
       </div>
-      
       <div className="right-menu">
         <FullScreen/>
         <div className="dropdown-wrap">
@@ -73,6 +70,6 @@ const mapStateToProps = state => {
     ...state.user
   }
 }
-export default connect(mapStateToProps, { logout, getUserInfo, toggleSiderBar })(
+export default connect(mapStateToProps, { logout, getUserInfo })(
   LayoutHeader
 );
