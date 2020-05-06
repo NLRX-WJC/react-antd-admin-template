@@ -3,7 +3,7 @@ class Doc extends Component {
   state = {  }
   render() { 
     return ( 
-      <div>
+      <div className="app-container">
         <h1>文档</h1>
         <h1>文档</h1>
         <h1>文档</h1>

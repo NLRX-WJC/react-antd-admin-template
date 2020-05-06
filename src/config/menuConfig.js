@@ -81,5 +81,10 @@ const menuList = [
     path: "/table",
     icon: "table"
   },
+  {
+    title: "剪贴板",
+    path: "/clipboard",
+    icon: "copy"
+  },
 ];
 export default menuList;

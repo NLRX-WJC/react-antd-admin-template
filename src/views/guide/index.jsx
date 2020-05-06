@@ -20,7 +20,7 @@ const guide = function () {
 };
 const Guide = function () {
   return (
-    <div style={{margin:'20px'}}>
+    <div className="app-container">
       <p className="warn-content">
         引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能。本
         Demo 是基于
