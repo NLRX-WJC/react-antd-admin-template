@@ -8,7 +8,7 @@ const steps = [
     }
   },
   {
-    element: '.anticon-menu-fold',
+    element: '.hamburger-container',
     popover: {
       title: 'Hamburger',
       description: '打开/收起左侧导航栏',
@@ -16,7 +16,7 @@ const steps = [
     }
   },
   {
-    element: '.anticon-fullscreen',
+    element: '.fullScreen-container',
     popover: {
       title: 'Screenfull',
       description: '全屏',
