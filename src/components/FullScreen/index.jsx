@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import screenfull from "screenfull";
-import { Icon, message } from "antd";
+import { Icon, message, Tooltip } from "antd";
 import "./index.less";
 class FullScreen extends Component {
   state = {
@@ -32,13 +32,13 @@ class FullScreen extends Component {
     }
   }
   render() {
+    const title = this.state.isFullscreen ? "取消全屏" : "全屏";
+    const type = this.state.isFullscreen ? "fullscreen-exit" : "fullscreen";
     return (
       <div className="fullScreen-container">
-        {this.state.isFullscreen ? (
-          <Icon type="fullscreen-exit" onClick={this.click} />
-        ) : (
-          <Icon type="fullscreen" onClick={this.click} />
-        )}
+        <Tooltip placement="topLeft" title={title}>
+          <Icon type={type} onClick={this.click} />
+        </Tooltip>
       </div>
     );
   }

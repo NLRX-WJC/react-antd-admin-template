@@ -4,6 +4,7 @@ import { Icon, Menu, Dropdown, Modal, Layout, Avatar } from "antd";
 import { Link } from "react-router-dom";
 import { logout, getUserInfo } from "@/store/actions";
 import FullScreen from '@/components/FullScreen'
+import Settings from '@/components/Settings'
 import Hamburger from '@/components/Hamburger'
 import "./index.less";
 const { Header } = Layout;
@@ -47,6 +48,7 @@ const LayoutHeader = (props) => {
       </div>
       <div className="right-menu">
         <FullScreen/>
+        <Settings/>
         <div className="dropdown-wrap">
           <Dropdown overlay={menu}>
             <div>

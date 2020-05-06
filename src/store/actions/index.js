@@ -1,6 +1,6 @@
 import { login, logout } from "./auth";
 import { getUserInfo, setUserToken, setUserInfo, resetUser } from "./user";
-import { toggleSiderBar } from "./app";
+import { toggleSiderBar, toggleSettingPanel } from "./app";
 export {
   login,
   logout,
@@ -8,5 +8,6 @@ export {
   setUserToken,
   setUserInfo,
   resetUser,
-  toggleSiderBar
-}
+  toggleSiderBar,
+  toggleSettingPanel,
+};

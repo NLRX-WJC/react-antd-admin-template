@@ -22,7 +22,16 @@ const steps = [
       description: '全屏',
       position: 'left'
     }
-  }
+  },
+  {
+    element: '.settings-container',
+    popover: {
+      title: 'Settings',
+      description: '系统设置',
+      position: 'left'
+    }
+  },
+  
 ]
 
 export default steps
