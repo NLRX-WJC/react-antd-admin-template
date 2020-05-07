@@ -28,6 +28,10 @@ const menuList = [
         title: "富文本",
         path: "/components/richTextEditor",
       },
+      {
+        title: "Markdown",
+        path: "/components/Markdown",
+      },
     ],
   },
   {

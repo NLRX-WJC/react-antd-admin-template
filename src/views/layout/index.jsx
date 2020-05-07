@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import RightPanel from "./RightPanel";
 import Sider from "./Sider";
 import { Layout } from "antd";
-const Main = (props) => {
+const Main = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider />

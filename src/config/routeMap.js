@@ -2,6 +2,7 @@ import Dashboard from "@/views/dashboard";
 import Doc from "@/views/doc";
 import Guide from "@/views/guide";
 import RichTextEditor from "@/views/components-demo/richTextEditor";
+import Markdown from "@/views/components-demo/Markdown";
 import KeyboardChart from "@/views/charts/keyboard";
 import LineChart from "@/views/charts/line";
 import MixChart from "@/views/charts/mixChart";
@@ -16,6 +17,7 @@ export default [
   { path: "/doc", component: Doc, roles: ["admin"] },
   { path: "/guide", component: Guide, roles: ["admin"] },
   { path: "/components/richTextEditor", component: RichTextEditor, roles: ["admin"] },
+  { path: "/components/Markdown", component: Markdown, roles: ["admin"] },
   { path: "/charts/keyboard", component: KeyboardChart, roles: ["admin"] },
   { path: "/charts/line", component: LineChart, roles: ["admin"] },
   { path: "/charts/mix-chart", component: MixChart, roles: ["admin"] },
