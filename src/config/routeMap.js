@@ -9,6 +9,7 @@ import MixChart from "@/views/charts/mixChart";
 import Menu1_1 from "@/views/nested/menu1/menu1-1"
 import Menu1_2_1 from "@/views/nested/menu1/menu1-2/menu1-2-1"
 import Table from "@/views/table";
+import Excel from "@/views/excel";
 import Clipboard from "@/views/clipboard";
 import Error404 from '@/views/error/404'
 
@@ -24,6 +25,7 @@ export default [
   { path: "/nested/menu1/menu1-1", component: Menu1_1, roles: ["admin"] },
   { path: "/nested/menu1/menu1-2/menu1-2-1", component: Menu1_2_1, roles: ["admin"] },
   { path: "/table", component: Table, roles: ["admin"] },
+  { path: "/excel", component: Excel, roles: ["admin"] },
   { path: "/clipboard", component: Clipboard, roles: ["admin"] },
   { path: "/error/404", component: Error404 },
 ];

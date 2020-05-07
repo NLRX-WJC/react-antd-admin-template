@@ -6,10 +6,10 @@ import "./index.less";
 /**
  * 根据当前浏览器地址栏的路由地址，在menuConfig中查找路由跳转的路径
  * 如路由地址为/charts/keyboard,则查找到的路径为[{title: "图表",...},{title: "键盘图表",...}]
- * @param {*} menuList 
- * @param {*} pathname 
+ * @param {*} menuList
+ * @param {*} pathname
  */
-const getPath = (menuList,pathname) => {
+const getPath = (menuList, pathname) => {
   let temppath = [];
   try {
     function getNodePath(node) {
@@ -35,29 +35,29 @@ const getPath = (menuList,pathname) => {
   } catch (e) {
     return temppath;
   }
-}
+};
 
 const BreadCrumb = (props) => {
   const { location } = props;
   const { pathname } = location;
-  let path = getPath(menuList, pathname)
-  
-  const first = path[0];
+  let path = getPath(menuList, pathname);
+  const first = path && path[0];
   if (first && first.title.trim() !== "首页") {
     path = [{ title: "首页", path: "/dashboard" }].concat(path);
   }
   return (
     <div className="Breadcrumb-container">
       <Breadcrumb>
-        {path.map((item) =>
-          item.title === "首页" ? (
-            <Breadcrumb.Item key={item.path}>
-              <a href={`#${item.path}`}>{item.title}</a>
-            </Breadcrumb.Item>
-          ) : (
-            <Breadcrumb.Item key={item.path}>{item.title}</Breadcrumb.Item>
-          )
-        )}
+        {path &&
+          path.map((item) =>
+            item.title === "首页" ? (
+              <Breadcrumb.Item key={item.path}>
+                <a href={`#${item.path}`}>{item.title}</a>
+              </Breadcrumb.Item>
+            ) : (
+              <Breadcrumb.Item key={item.path}>{item.title}</Breadcrumb.Item>
+            )
+          )}
       </Breadcrumb>
     </div>
   );

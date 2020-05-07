@@ -10,7 +10,7 @@ const Markdown = () => {
     <div className="app-container">
       <TypingCard title="Markdown编辑器" source={cardContent} />
       <br />
-      <Card bordered={false} className="card-item">
+      <Card bordered={false}>
         <Editor
           initialValue="hello 难凉热血!"
           previewStyle="vertical"

@@ -15,6 +15,7 @@
     "draftjs-to-markdown": "^0.6.0",
     "driver.js": "^0.9.8",
     "echarts": "^4.7.0",
+    "file-saver": "^2.0.2",
     "js-cookie": "^2.2.1",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
@@ -30,7 +31,9 @@
     "react-transition-group": "^4.3.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "screenfull": "^5.0.2"
+    "screenfull": "^5.0.2",
+    "script-loader": "^0.7.2",
+    "xlsx": "^0.16.0"
   },
   "scripts": {
     "start": "react-app-rewired start",

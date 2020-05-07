@@ -86,6 +86,11 @@ const menuList = [
     icon: "table",
   },
   {
+    title: "Excel",
+    path: "/excel",
+    icon: "file-excel",
+  },
+  {
     title: "剪贴板",
     path: "/clipboard",
     icon: "copy",

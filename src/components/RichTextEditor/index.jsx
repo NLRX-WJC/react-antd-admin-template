@@ -23,7 +23,7 @@ class RichTextEditor extends Component {
       <div className="app-container">
         <TypingCard title='富文本编辑器' source={cardContent} />
         <br/>
-        <Card bordered={false} className='card-item'>
+        <Card bordered={false}>
           <Editor
             editorState={editorState}
             onEditorStateChange={this.onEditorStateChange}
