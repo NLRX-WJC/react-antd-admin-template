@@ -2,6 +2,7 @@ import React from "react";
 import Driver from "driver.js"; // import driver.js
 import "driver.js/dist/driver.min.css"; // import driver.js css
 import { Button } from "antd";
+import TypingCard from '@/components/TypingCard'
 import steps from "./steps";
 const driver = new Driver({
   animate: false, // 在更改突出显示的元素时是否设置动画，
@@ -19,15 +20,11 @@ const guide = function () {
   driver.start();
 };
 const Guide = function () {
+  const cardContent = `引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能。
+                       本Demo是基于<a href="https://github.com/kamranahmedse/driver.js">driver.js</a>`
   return (
     <div className="app-container">
-      <p className="warn-content">
-        引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能。本
-        Demo 是基于
-        <a href="https://github.com/kamranahmedse/driver.js" target="_blank">
-          driver.js.
-        </a>
-      </p>
+      <TypingCard title='新手引导' source={cardContent}/>
       <Button type="primary" onClick={guide}>
         打开引导
       </Button>

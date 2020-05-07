@@ -1,7 +1,7 @@
 import Dashboard from "@/views/dashboard";
 import Doc from "@/views/doc";
 import Guide from "@/views/guide";
-import BackToTop from "@/views/components-demo/backToTop.jsx";
+import RichTextEditor from "@/views/components-demo/richTextEditor";
 import KeyboardChart from "@/views/charts/keyboard";
 import LineChart from "@/views/charts/line";
 import MixChart from "@/views/charts/mixChart";
@@ -15,7 +15,7 @@ export default [
   { path: "/dashboard", component: Dashboard, roles: ["admin"] },
   { path: "/doc", component: Doc, roles: ["admin"] },
   { path: "/guide", component: Guide, roles: ["admin"] },
-  { path: "/components/back-to-top", component: BackToTop, roles: ["admin"] },
+  { path: "/components/richTextEditor", component: RichTextEditor, roles: ["admin"] },
   { path: "/charts/keyboard", component: KeyboardChart, roles: ["admin"] },
   { path: "/charts/line", component: LineChart, roles: ["admin"] },
   { path: "/charts/mix-chart", component: MixChart, roles: ["admin"] },

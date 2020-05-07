@@ -25,8 +25,8 @@ const menuList = [
     icon: "appstore",
     children: [
       {
-        title: "回到顶部",
-        path: "/components/back-to-top",
+        title: "富文本",
+        path: "/components/richTextEditor",
       },
     ],
   },
