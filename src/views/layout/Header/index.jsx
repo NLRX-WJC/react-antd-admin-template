@@ -6,6 +6,7 @@ import { logout, getUserInfo } from "@/store/actions";
 import FullScreen from '@/components/FullScreen'
 import Settings from '@/components/Settings'
 import Hamburger from '@/components/Hamburger'
+import BreadCrumb from '@/components/BreadCrumb'
 import "./index.less";
 const { Header } = Layout;
 
@@ -43,9 +44,8 @@ const LayoutHeader = (props) => {
   );
   return (
     <Header style={sidebarCollapsed?{ width: "calc(100% - 80px)" }:{width: "calc(100% - 200px)"}}>
-      <div className="left-menu">
-        <Hamburger/>
-      </div>
+      <Hamburger />
+      <BreadCrumb/>
       <div className="right-menu">
         <FullScreen/>
         <Settings/>

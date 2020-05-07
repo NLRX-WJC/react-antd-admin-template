@@ -12,12 +12,12 @@ const menuList = [
   {
     title: "文档",
     path: "/doc",
-    icon: "file"
+    icon: "file",
   },
   {
     title: "引导页",
     path: "/guide",
-    icon: "key"
+    icon: "key",
   },
   {
     title: "组件",
@@ -28,7 +28,7 @@ const menuList = [
         title: "回到顶部",
         path: "/components/back-to-top",
       },
-    ]
+    ],
   },
   {
     title: "图表",
@@ -70,21 +70,21 @@ const menuList = [
                 title: "菜单1-2-1",
                 path: "/nested/menu1/menu1-2/menu1-2-1",
               },
-            ]
+            ],
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
   {
     title: "表格",
     path: "/table",
-    icon: "table"
+    icon: "table",
   },
   {
     title: "剪贴板",
     path: "/clipboard",
-    icon: "copy"
+    icon: "copy",
   },
 ];
 export default menuList;

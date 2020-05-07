@@ -3,6 +3,7 @@ import { Menu, Icon } from "antd";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import menuList from "@/config/menuConfig";
+import "./index.less";
 const SubMenu = Menu.SubMenu;
 class Meun extends Component {
   state = {
@@ -53,11 +54,9 @@ class Meun extends Component {
           );
           // 如果存在, 说明当前item的子列表需要打开
           if (cItem) {
-            this.setState((state) => (
-              {
-                openKey: [...state.openKey,item.path]
-              }
-            ));
+            this.setState((state) => ({
+              openKey: [...state.openKey, item.path],
+            }));
           }
 
           // 向pre添加<SubMenu>
@@ -91,14 +90,16 @@ class Meun extends Component {
     const path = this.props.location.pathname;
     const openKey = this.state.openKey;
     return (
-      <Menu
-        mode="inline"
-        theme="dark"
-        selectedKeys={[path]}
-        defaultOpenKeys={openKey}
-      >
-        {this.state.menuTreeNode}
-      </Menu>
+      <div className="sidebar-menu-container">
+        <Menu
+          mode="inline"
+          theme="dark"
+          selectedKeys={[path]}
+          defaultOpenKeys={openKey}
+        >
+          {this.state.menuTreeNode}
+        </Menu>
+      </div>
     );
   }
 }
