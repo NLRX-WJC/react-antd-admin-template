@@ -17,6 +17,7 @@
     "echarts": "^4.7.0",
     "file-saver": "^2.0.2",
     "js-cookie": "^2.2.1",
+    "jszip": "^3.4.0",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "prop-types": "^15.7.2",

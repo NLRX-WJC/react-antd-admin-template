@@ -101,6 +101,11 @@ const menuList = [
     ],
   },
   {
+    title: "Zip",
+    path: "/zip",
+    icon: "file-zip",
+  },
+  {
     title: "剪贴板",
     path: "/clipboard",
     icon: "copy",

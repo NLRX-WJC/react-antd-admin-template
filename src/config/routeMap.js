@@ -11,6 +11,7 @@ import Menu1_2_1 from "@/views/nested/menu1/menu1-2/menu1-2-1"
 import Table from "@/views/table";
 import ExportExcel from "@/views/excel/exportExcel";
 import UploadExcel from "@/views/excel/uploadExcel";
+import Zip from "@/views/zip";
 import Clipboard from "@/views/clipboard";
 import Error404 from '@/views/error/404'
 
@@ -28,6 +29,7 @@ export default [
   { path: "/table", component: Table, roles: ["admin"] },
   { path: "/excel/export", component: ExportExcel, roles: ["admin"] },
   { path: "/excel/upload", component: UploadExcel, roles: ["admin"] },
+  { path: "/zip", component: Zip, roles: ["admin"] },
   { path: "/clipboard", component: Clipboard, roles: ["admin"] },
   { path: "/error/404", component: Error404 },
 ];

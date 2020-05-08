@@ -1,16 +1,5 @@
 import React, { Component } from "react";
-import {
-  Table,
-  Tag,
-  Form,
-  Icon,
-  Button,
-  Input,
-  Radio,
-  Select,
-  message,
-  Collapse,
-} from "antd";
+import { Table, Tag, Form, Icon, Button, Input, message, Collapse } from "antd";
 
 import { excelList } from "@/api/excel";
 const { Panel } = Collapse;
@@ -52,13 +41,11 @@ const columns = [
     align: "center",
   },
 ];
-class Excel extends Component {
+class Zip extends Component {
   _isMounted = false; // 这个变量是用来标志当前组件是否挂载
   state = {
     list: [],
-    filename: "excel-file",
-    autoWidth: true,
-    bookType: "xlsx",
+    filename: "file",
     downloadLoading: false,
     selectedRows: [],
     selectedRowKeys: [],
@@ -89,18 +76,19 @@ class Excel extends Component {
     this.setState({
       downloadLoading: true,
     });
-    import("@/lib/Export2Excel").then((excel) => {
+    import("@/lib/Export2Zip").then((zip) => {
       const tHeader = ["Id", "Title", "Author", "Readings", "Date"];
       const filterVal = ["id", "title", "author", "readings", "date"];
       const list = type === "all" ? this.state.list : this.state.selectedRows;
       const data = this.formatJson(filterVal, list);
-      excel.export_json_to_excel({
-        header: tHeader,
+      console.log("data", data);
+
+      zip.export_txt_to_zip(
+        tHeader,
         data,
-        filename: this.state.filename,
-        autoWidth: this.state.autoWidth,
-        bookType: this.state.bookType,
-      });
+        this.state.filename,
+        this.state.filename
+      );
       this.setState({
         selectedRowKeys: [], // 导出完成后将多选框清空
         downloadLoading: false,
@@ -108,21 +96,11 @@ class Excel extends Component {
     });
   };
   formatJson(filterVal, jsonData) {
-    return jsonData.map(v => filterVal.map(j => v[j]))
+    return jsonData.map((v) => filterVal.map((j) => v[j]));
   }
   filenameChange = (e) => {
     this.setState({
       filename: e.target.value,
-    });
-  };
-  autoWidthChange = (e) => {
-    this.setState({
-      autoWidth: e.target.value,
-    });
-  };
-  bookTypeChange = (value) => {
-    this.setState({
-      bookType: value,
     });
   };
   render() {
@@ -142,34 +120,14 @@ class Excel extends Component {
                   prefix={
                     <Icon type="file" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
-                  placeholder="请输入文件名(默认excel-file)"
+                  placeholder="请输入文件名(默认file)"
                   onChange={this.filenameChange}
                 />
-              </Form.Item>
-              <Form.Item label="单元格宽度是否自适应:">
-                <Radio.Group
-                  onChange={this.autoWidthChange}
-                  value={this.state.autoWidth}
-                >
-                  <Radio value={true}>是</Radio>
-                  <Radio value={false}>否</Radio>
-                </Radio.Group>
-              </Form.Item>
-              <Form.Item label="文件类型:">
-                <Select
-                  defaultValue="xlsx"
-                  style={{ width: 120 }}
-                  onChange={this.bookTypeChange}
-                >
-                  <Select.Option value="xlsx">xlsx</Select.Option>
-                  <Select.Option value="csv">csv</Select.Option>
-                  <Select.Option value="txt">txt</Select.Option>
-                </Select>
               </Form.Item>
               <Form.Item>
                 <Button
                   type="primary"
-                  icon="file-excel"
+                  icon="file-zip"
                   onClick={this.handleDownload.bind(null, "all")}
                 >
                   全部导出
@@ -178,7 +136,7 @@ class Excel extends Component {
               <Form.Item>
                 <Button
                   type="primary"
-                  icon="file-excel"
+                  icon="file-zip"
                   onClick={this.handleDownload.bind(null, "selected")}
                 >
                   导出已选择项
@@ -202,4 +160,4 @@ class Excel extends Component {
   }
 }
 
-export default Excel;
+export default Zip;
