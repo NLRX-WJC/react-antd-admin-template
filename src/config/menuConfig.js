@@ -89,6 +89,16 @@ const menuList = [
     title: "Excel",
     path: "/excel",
     icon: "file-excel",
+    children: [
+      {
+        title: "导出Excel",
+        path: "/excel/export",
+      },
+      {
+        title: "上传Excel",
+        path: "/excel/upload",
+      }
+    ],
   },
   {
     title: "剪贴板",
