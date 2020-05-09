@@ -1,6 +1,6 @@
 const tokens = {
   admin: "admin-token",
-  editor: "editor-token",
+  guest: "guest-token",
 };
 
 export default {

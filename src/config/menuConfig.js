@@ -7,7 +7,6 @@ const menuList = [
     title: "首页",
     path: "/dashboard",
     icon: "home",
-    roles: ["admin"],
   },
   {
     title: "文档",
@@ -18,6 +17,23 @@ const menuList = [
     title: "引导页",
     path: "/guide",
     icon: "key",
+  },
+  {
+    title: "权限测试",
+    path: "/permission",
+    icon: "lock",
+    children: [
+      {
+        title: "管理员页面",
+        path: "/permission/adminPage",
+        roles:["admin"]
+      },
+      {
+        title: "游客页面",
+        path: "/permission/guestPage",
+        roles:["guest"]
+      },
+    ],
   },
   {
     title: "组件",
