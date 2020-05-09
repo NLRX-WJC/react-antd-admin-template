@@ -138,8 +138,11 @@ class TableComponent extends Component {
       editItem(values).then((response) => {
         form.resetFields();
         this.setState({ editModalVisible: false, editModalLoading: false });
+        message.success("编辑成功!")
         this.fetchData()
-      });
+      }).catch(e => {
+        message.success("编辑失败,请重试!")
+      })
       
     });
   };

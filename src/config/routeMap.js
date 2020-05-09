@@ -1,19 +1,21 @@
-import Dashboard from "@/views/dashboard";
-import Doc from "@/views/doc";
-import Guide from "@/views/guide";
-import RichTextEditor from "@/views/components-demo/richTextEditor";
-import Markdown from "@/views/components-demo/Markdown";
-import KeyboardChart from "@/views/charts/keyboard";
-import LineChart from "@/views/charts/line";
-import MixChart from "@/views/charts/mixChart";
-import Menu1_1 from "@/views/nested/menu1/menu1-1"
-import Menu1_2_1 from "@/views/nested/menu1/menu1-2/menu1-2-1"
-import Table from "@/views/table";
-import ExportExcel from "@/views/excel/exportExcel";
-import UploadExcel from "@/views/excel/uploadExcel";
-import Zip from "@/views/zip";
-import Clipboard from "@/views/clipboard";
-import Error404 from '@/views/error/404'
+import Loadable from 'react-loadable';
+import Loading from '@/components/Loading'
+const Dashboard = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/dashboard'),loading: Loading});
+const Doc = Loadable({loader: () => import(/*webpackChunkName:'Doc'*/'@/views/doc'),loading: Loading});
+const Guide = Loadable({loader: () => import(/*webpackChunkName:'Guide'*/'@/views/guide'),loading: Loading});
+const RichTextEditor = Loadable({loader: () => import(/*webpackChunkName:'RichTextEditor'*/'@/views/components-demo/richTextEditor'),loading: Loading});
+const Markdown = Loadable({loader: () => import(/*webpackChunkName:'Markdown'*/'@/views/components-demo/Markdown'),loading: Loading});
+const KeyboardChart = Loadable({loader: () => import(/*webpackChunkName:'KeyboardChart'*/'@/views/charts/keyboard'),loading: Loading});
+const LineChart = Loadable({loader: () => import(/*webpackChunkName:'LineChart'*/'@/views/charts/line'),loading: Loading});
+const MixChart = Loadable({loader: () => import(/*webpackChunkName:'MixChart'*/'@/views/charts/mixChart'),loading: Loading});
+const Menu1_1 = Loadable({loader: () => import(/*webpackChunkName:'Menu1_1'*/'@/views/nested/menu1/menu1-1'),loading: Loading});
+const Menu1_2_1 = Loadable({loader: () => import(/*webpackChunkName:'Menu1_2_1'*/'@/views/nested/menu1/menu1-2/menu1-2-1'),loading: Loading});
+const Table = Loadable({loader: () => import(/*webpackChunkName:'Table'*/'@/views/table'),loading: Loading});
+const ExportExcel = Loadable({loader: () => import(/*webpackChunkName:'ExportExcel'*/'@/views/excel/exportExcel'),loading: Loading});
+const UploadExcel = Loadable({ loader: () => import(/*webpackChunkName:'UploadExcel'*/'@/views/excel/uploadExcel'),loading: Loading });
+const Zip = Loadable({loader: () => import(/*webpackChunkName:'Zip'*/'@/views/zip'),loading: Loading});
+const Clipboard = Loadable({loader: () => import(/*webpackChunkName:'Clipboard'*/'@/views/clipboard'),loading: Loading});
+const Error404 = Loadable({loader: () => import(/*webpackChunkName:'Error404'*/'@/views/error/404'),loading: Loading});
 
 export default [
   { path: "/dashboard", component: Dashboard, roles: ["admin"] },

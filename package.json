@@ -26,6 +26,7 @@
     "react-document-title": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-draft-wysiwyg": "^1.14.5",
+    "react-loadable": "^5.5.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
@@ -38,7 +39,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-app-rewired --max-old-space-size=4096 build ",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
