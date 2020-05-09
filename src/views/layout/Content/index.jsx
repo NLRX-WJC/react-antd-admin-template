@@ -1,6 +1,5 @@
 import React from "react";
 import { Redirect, withRouter, Route, Switch } from "react-router-dom";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import DocumentTitle from "react-document-title";
 import { connect } from "react-redux";
 import { Layout } from "antd";
@@ -35,30 +34,21 @@ const LayoutContent = (props) => {
   return (
     <DocumentTitle title={getPageTitle(menuList, pathname)}>
       <Content style={{ margin: "64px 16px 24px 16px" }}>
-        <TransitionGroup>
-          <CSSTransition
-            classNames="fade"
-            key={props.location.pathname}
-            timeout={500}
-          >
-            <Switch>
-              <Redirect exact from="/" to="/dashboard" />
-              {routeList.map((route) => {
-                return (
-                  handleFilter(route) && (
-                    <Route
-                      component={route.component}
-                      key={route.path}
-                      path={route.path}
-                    />
-                  )
-                );
-              })}
-
-              <Redirect to="/error/404" />
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup>
+        <Switch>
+          <Redirect exact from="/" to="/dashboard" />
+          {routeList.map((route) => {
+            return (
+              handleFilter(route) && (
+                <Route
+                  component={route.component}
+                  key={route.path}
+                  path={route.path}
+                />
+              )
+            );
+          })}
+          <Redirect to="/error/404" />
+        </Switch>
       </Content>
     </DocumentTitle>
   );
