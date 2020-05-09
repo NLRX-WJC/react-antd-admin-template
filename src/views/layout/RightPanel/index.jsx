@@ -1,23 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { ChromePicker } from "react-color";
 import { Drawer, Switch, Row, Col, Divider } from "antd";
 import { toggleSettingPanel, changeSetting } from "@/store/actions";
 class RightPanel extends Component {
-  state = {
-    background: "#1DA57A",
-  };
   sidebarLogoChange = (checked) => {
     this.props.changeSetting({ key: "sidebarLogo", value: checked });
   };
   fixedHeaderChange = (checked) => {
     this.props.changeSetting({ key: "fixedHeader", value: checked });
-  };
-  themeChange = (color) => {
-    this.setState({ background: color.hex });
-    window.less.modifyVars({
-      "@primary-color": color.hex
-    });
   };
   render() {
     const {
@@ -35,19 +25,6 @@ class RightPanel extends Component {
           onClose={toggleSettingPanel}
           visible={settingPanelVisible}
         >
-          <Row>
-            <Col span={5}>
-              <span>主题色</span>
-            </Col>
-            <Col span={12}>
-              <ChromePicker
-                width={200}
-                color={this.state.background}
-                onChangeComplete={this.themeChange}
-              />
-            </Col>
-          </Row>
-          <Divider dashed />
           <Row>
             <Col span={12}>
               <span>侧边栏 Logo</span>
