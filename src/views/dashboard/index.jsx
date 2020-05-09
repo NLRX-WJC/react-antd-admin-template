@@ -9,8 +9,6 @@ import PieChart from "./components/PieChart";
 import TransactionTable from "./components/TransactionTable";
 import BoxCard from "./components/BoxCard";
 
-
-
 const lineChartData = {
   "New Visits": {
     expectedData: [100, 120, 161, 134, 105, 160, 165],
@@ -40,6 +38,11 @@ class Home extends Component {
   render() {
     return (
       <div className="dashboard-container">
+        <a
+          href="https://github.com/NLRX-WJC/react-antd-admin-template"
+          target="_blank"
+          className="github-corner"
+        ></a>
         <PanelGroup handleSetLineChartData={this.handleSetLineChartData} />
 
         <LineChart
@@ -50,7 +53,7 @@ class Home extends Component {
             marginBottom: "25px",
           }}
         />
-        
+
         <Row gutter={32}>
           <Col xs={24} sm={24} lg={8}>
             <div className="chart-wrapper">
@@ -70,11 +73,25 @@ class Home extends Component {
         </Row>
 
         <Row gutter={8}>
-          <Col xs={24} sm={24} md={24} lg={12} xl={12} style={{paddingRight:"8px",marginBottom:"30px"}}>
+          <Col
+            xs={24}
+            sm={24}
+            md={24}
+            lg={12}
+            xl={12}
+            style={{ paddingRight: "8px", marginBottom: "30px" }}
+          >
             <TransactionTable />
           </Col>
-          <Col xs={24} sm={24} md={24} lg={12} xl={12} style={{marginBottom:"30px"}}>
-            <BoxCard/>
+          <Col
+            xs={24}
+            sm={24}
+            md={24}
+            lg={12}
+            xl={12}
+            style={{ marginBottom: "30px" }}
+          >
+            <BoxCard />
           </Col>
         </Row>
       </div>

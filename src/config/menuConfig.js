@@ -126,5 +126,10 @@ const menuList = [
     path: "/clipboard",
     icon: "copy",
   },
+  {
+    title: "关于作者",
+    path: "/about",
+    icon: "user",
+  },
 ];
 export default menuList;

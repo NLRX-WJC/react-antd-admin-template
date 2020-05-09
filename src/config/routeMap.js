@@ -18,6 +18,7 @@ const UploadExcel = Loadable({ loader: () => import(/*webpackChunkName:'UploadEx
 const Zip = Loadable({loader: () => import(/*webpackChunkName:'Zip'*/'@/views/zip'),loading: Loading});
 const Clipboard = Loadable({loader: () => import(/*webpackChunkName:'Clipboard'*/'@/views/clipboard'),loading: Loading});
 const Error404 = Loadable({loader: () => import(/*webpackChunkName:'Error404'*/'@/views/error/404'),loading: Loading});
+const About = Loadable({loader: () => import(/*webpackChunkName:'About'*/'@/views/about'),loading: Loading});
 
 export default [
   { path: "/dashboard", component: Dashboard, roles: ["admin","guest"] },
@@ -37,5 +38,6 @@ export default [
   { path: "/excel/upload", component: UploadExcel, roles: ["admin","guest"] },
   { path: "/zip", component: Zip, roles: ["admin","guest"] },
   { path: "/clipboard", component: Clipboard, roles: ["admin","guest"] },
+  { path: "/about", component: About, roles: ["admin","guest"] },
   { path: "/error/404", component: Error404 },
 ];
