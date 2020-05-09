@@ -50,7 +50,6 @@ class Home extends Component {
             marginBottom: "25px",
           }}
         />
-
         
         <Row gutter={32}>
           <Col xs={24} sm={24} lg={8}>
@@ -69,7 +68,6 @@ class Home extends Component {
             </div>
           </Col>
         </Row>
-        
 
         <Row gutter={8}>
           <Col xs={24} sm={24} md={24} lg={12} xl={12} style={{paddingRight:"8px",marginBottom:"30px"}}>

@@ -7,7 +7,7 @@ const Settings = (props) => {
   const { toggleSettingPanel } = props;
   return (
     <div className="settings-container">
-      <Tooltip placement="topLeft" title="系统设置">
+      <Tooltip placement="bottom" title="系统设置">
         <Icon type="setting" onClick={toggleSettingPanel} />
       </Tooltip>
     </div>

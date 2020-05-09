@@ -36,7 +36,7 @@ class FullScreen extends Component {
     const type = this.state.isFullscreen ? "fullscreen-exit" : "fullscreen";
     return (
       <div className="fullScreen-container">
-        <Tooltip placement="topLeft" title={title}>
+        <Tooltip placement="bottom" title={title}>
           <Icon type={type} onClick={this.click} />
         </Tooltip>
       </div>
