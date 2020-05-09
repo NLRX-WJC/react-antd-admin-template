@@ -6,13 +6,19 @@ import Menu from "./Menu";
 const { Sider } = Layout;
 
 const LayoutSider = (props) => {
-  const { sidebarCollapsed } = props;
+  const { sidebarCollapsed, sidebarLogo } = props;
   return (
     <Sider collapsible collapsed={sidebarCollapsed} trigger={null}>
-      <Logo />
+      {sidebarLogo ? <Logo /> : null}
       <Menu />
     </Sider>
   );
 };
 
-export default connect((state) => state.app)(LayoutSider);
+const mapStateToProps = (state) => {
+  return {
+    ...state.app,
+    ...state.settings,
+  };
+};
+export default connect(mapStateToProps)(LayoutSider);
