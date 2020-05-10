@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Drawer, Switch, Row, Col, Divider } from "antd";
+import { Drawer, Switch, Row, Col, Divider, Alert, Icon,Button } from "antd";
 import { toggleSettingPanel, changeSetting } from "@/store/actions";
 class RightPanel extends Component {
   sidebarLogoChange = (checked) => {
@@ -21,7 +21,7 @@ class RightPanel extends Component {
         <Drawer
           title="系统设置"
           placement="right"
-          width={300}
+          width={350}
           onClose={toggleSettingPanel}
           visible={settingPanelVisible}
         >
@@ -51,7 +51,20 @@ class RightPanel extends Component {
                 onChange={this.fixedHeaderChange}
               />
             </Col>
-            <span style={{ color: "red" }}>注:这个功能还没完成</span>
+          </Row>
+          <Divider dashed />
+          <Row>
+            <Col span={24}>
+              <Alert
+                message="开发者请注意:"
+                description="配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件"
+                type="warning"
+                showIcon
+                icon={<Icon type="notification" />}
+                style={{marginBottom: "16px"}}
+              />
+              <Button style={{width:"100%"}} icon="copy">拷贝配置</Button>
+            </Col>
           </Row>
         </Drawer>
       </div>

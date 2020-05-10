@@ -33,7 +33,7 @@ const LayoutContent = (props) => {
   };
   return (
     <DocumentTitle title={getPageTitle(menuList, pathname)}>
-      <Content style={{ margin: "64px 16px 24px 16px" }}>
+      <Content style={{ margin: "0px 16px" }}>
         <Switch>
           <Redirect exact from="/" to="/dashboard" />
           {routeList.map((route) => {

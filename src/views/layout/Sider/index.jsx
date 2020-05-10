@@ -8,7 +8,12 @@ const { Sider } = Layout;
 const LayoutSider = (props) => {
   const { sidebarCollapsed, sidebarLogo } = props;
   return (
-    <Sider collapsible collapsed={sidebarCollapsed} trigger={null}>
+    <Sider
+      collapsible
+      collapsed={sidebarCollapsed}
+      trigger={null}
+      style={{ zIndex: "10" }}
+    >
       {sidebarLogo ? <Logo /> : null}
       <Menu />
     </Sider>

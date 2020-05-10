@@ -1,10 +1,11 @@
 .ant-layout-header {
-  background: #fff !important;
-  position: fixed;
-  top: 0;
-  right: 0;
+  transition: width 0.2s;
+  padding: 0px !important;
   z-index: 9;
-  transition: width .2s;
+  position: relative;
+  height: 64px;
+  background: #fff !important;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   .right-menu {
     float: right;
     .dropdown-wrap {
@@ -22,4 +23,9 @@
       }
     }
   }
+}
+.fix-header {
+  position: fixed;
+  top: 0;
+  right: 0;
 }
