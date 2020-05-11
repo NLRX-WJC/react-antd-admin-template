@@ -1,7 +1,8 @@
-<p align="center">
-   <a href="https://nlrx-wjc.github.io/react-antd-admin-template/" target="_blank">
-      <img src="./logo.png"/>
-   </a>
+
+<p align="center">
+   <a href="https://nlrx-wjc.github.io/react-antd-admin-template/" target="_blank">
+      <img src="./logo.png"/>
+   </a>
 </p>
 
 # 简介
@@ -12,9 +13,11 @@
 - [Gitee在线预览(国内用户可访问该地址)](https://nlrx.gitee.io/react-antd-admin-template/)
 - 开发文档正在编写中...
 
+
 ![](./guide.gif)
 
-## 开发
+
+# 开发
 
 ```
 # 克隆项目
