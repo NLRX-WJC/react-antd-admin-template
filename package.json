@@ -2,7 +2,7 @@
   "name": "react_admin_template",
   "version": "0.1.0",
   "private": true,
-  "homepage":"https://nlrx-wjc.github.io/react-antd-admin-template/",
+  "homepage": "https://nlrx-wjc.github.io/react-antd-admin-template/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -39,7 +39,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired --max-old-space-size=4096 build ",
+    "build": "cross-env GENERATE_SOURCEMAP=false react-app-rewired --max-old-space-size=4096 build ",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.13.0",
+    "cross-env": "^7.0.2",
     "customize-cra": "^0.9.1",
     "mockjs": "^1.1.0",
     "react-app-rewired": "^2.1.5"
