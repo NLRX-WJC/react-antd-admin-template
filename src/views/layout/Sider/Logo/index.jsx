@@ -1,10 +1,11 @@
 import React from "react";
+import logo from "@/assets/images/logo.png"
 import "./index.less";
 const Logo = () => {
   return (
     <div className="sidebar-logo-container">
       <img
-        src="https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png"
+        src={logo}
         className="sidebar-logo"
         alt=""
       />
