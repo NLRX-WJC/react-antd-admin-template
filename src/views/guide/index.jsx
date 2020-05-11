@@ -5,7 +5,7 @@ import { Button } from "antd";
 import TypingCard from '@/components/TypingCard'
 import steps from "./steps";
 const driver = new Driver({
-  animate: false, // 在更改突出显示的元素时是否设置动画，
+  animate: true, // 在更改突出显示的元素时是否设置动画，
                   // 当header的position为fixed时，会覆盖元素，这是driver.js的bug，
                   // 详细内容见https://github.com/kamranahmedse/driver.js/issues/97
   opacity: 0.75, // 背景不透明度（0表示只有弹出窗口，没有覆盖）
