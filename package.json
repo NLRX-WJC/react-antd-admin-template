@@ -41,7 +41,8 @@
     "start": "react-app-rewired start",
     "build": "cross-env GENERATE_SOURCEMAP=false react-app-rewired --max-old-space-size=4096 build ",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "commit": "git cz"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -63,6 +64,13 @@
     "cross-env": "^7.0.2",
     "customize-cra": "^0.9.1",
     "mockjs": "^1.1.0",
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.0.2",
     "react-app-rewired": "^2.1.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
