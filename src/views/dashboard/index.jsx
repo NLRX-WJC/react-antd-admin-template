@@ -41,8 +41,9 @@ class Home extends Component {
         <a
           href="https://github.com/NLRX-WJC/react-antd-admin-template"
           target="_blank"
+          rel="noopener noreferrer"
           className="github-corner"
-        ></a>
+        > </a>
         <PanelGroup handleSetLineChartData={this.handleSetLineChartData} />
 
         <LineChart
