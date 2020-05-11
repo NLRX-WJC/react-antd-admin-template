@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Menu, Icon } from "antd";
 import { Link, withRouter } from "react-router-dom";
+import { Scrollbars } from "react-custom-scrollbars";
 import { connect } from "react-redux";
 import menuList from "@/config/menuConfig";
 import "./index.less";
@@ -30,18 +31,9 @@ class Meun extends Component {
     return menuList.reduce((pre, item) => {
       if (this.filterMenuItem(item)) {
         if (!item.children) {
-          // // 判断item是否是当前对应的item
-          // if (item.key === path || path.indexOf(item.key) === 0) {
-          //   // 更新redux中的headerTitle状态
-          //   this.props.setHeadTitle(item.title);
-          // }
-
           pre.push(
             <Menu.Item key={item.path}>
-              <Link
-                to={item.path}
-                // onClick={() => this.props.setHeadTitle(item.title)}
-              >
+              <Link to={item.path}>
                 {item.icon ? <Icon type={item.icon} /> : null}
                 <span>{item.title}</span>
               </Link>
@@ -91,14 +83,16 @@ class Meun extends Component {
     const openKey = this.state.openKey;
     return (
       <div className="sidebar-menu-container">
-        <Menu
-          mode="inline"
-          theme="dark"
-          selectedKeys={[path]}
-          defaultOpenKeys={openKey}
-        >
-          {this.state.menuTreeNode}
-        </Menu>
+        <Scrollbars autoHide autoHideTimeout={1000} autoHideDuration={200}>
+          <Menu
+            mode="inline"
+            theme="dark"
+            selectedKeys={[path]}
+            defaultOpenKeys={openKey}
+          >
+            {this.state.menuTreeNode}
+          </Menu>
+        </Scrollbars>
       </div>
     );
   }
