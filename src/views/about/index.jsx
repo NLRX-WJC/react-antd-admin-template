@@ -12,8 +12,8 @@ const About = () => {
   <p>下边是我的微信，欢迎同好伙伴一起树(tree)新(new)风(bee)！！！</p>
   <p>如果你觉得这个项目对你有些许帮助的话，欢迎赞赏哈。</p>
   <p>您的赞赏，是我不断前进的动力！</p>
-  <img src="https://s1.ax1x.com/2020/05/09/Ylbr4g.md.jpg" alt="wechat" style="height:550px"/>
-  <img src="https://s1.ax1x.com/2020/05/09/YlLSe0.md.png" alt="wechat" style="height:550px"/>
+  <img src="https://ae01.alicdn.com/kf/H81399396d48b43528592883b2e116eb30.jpg" alt="wechat" style="height:550px"/>
+  <img src="https://ae01.alicdn.com/kf/H77adde64b25b4a28b70b37fd444d1543E.jpg" alt="wechat" style="height:550px"/>
   `;
   return (
     <div className="app-container">

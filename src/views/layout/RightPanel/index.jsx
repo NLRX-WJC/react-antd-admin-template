@@ -1,13 +1,30 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Drawer, Switch, Row, Col, Divider, Alert, Icon,Button } from "antd";
+import { Drawer, Switch, Row, Col, Divider, Alert, Icon, Button } from "antd";
 import { toggleSettingPanel, changeSetting } from "@/store/actions";
+import clip from "@/utils/clipboard";
 class RightPanel extends Component {
+  state = {
+    sidebarLogo: true,
+    fixedHeader: true,
+  };
   sidebarLogoChange = (checked) => {
+    this.setState({ sidebarLogo: checked });
     this.props.changeSetting({ key: "sidebarLogo", value: checked });
   };
   fixedHeaderChange = (checked) => {
+    this.setState({ fixedHeader: checked });
     this.props.changeSetting({ key: "fixedHeader", value: checked });
+  };
+  handleCopy = (e) => {
+    let config = `
+    export default {
+      showSettings: true,
+      sidebarLogo: ${this.state.sidebarLogo},
+      fixedHeader: ${this.state.fixedHeader},
+    }
+    `;
+    clip(config, e);
   };
   render() {
     const {
@@ -57,13 +74,21 @@ class RightPanel extends Component {
             <Col span={24}>
               <Alert
                 message="开发者请注意:"
-                description="配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件"
+                description="配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改/src/defaultSettings.js配置文件"
                 type="warning"
                 showIcon
                 icon={<Icon type="notification" />}
-                style={{marginBottom: "16px"}}
+                style={{ marginBottom: "16px" }}
               />
-              <Button style={{width:"100%"}} icon="copy">拷贝配置</Button>
+              <Button
+                style={{ width: "100%" }}
+                icon="copy"
+                onClick={(e) => {
+                  this.handleCopy(e);
+                }}
+              >
+                拷贝配置
+              </Button>
             </Col>
           </Row>
         </Drawer>
