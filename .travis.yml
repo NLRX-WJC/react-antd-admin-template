@@ -11,3 +11,5 @@ before_script:
 script:
   - ./deploy.sh
 branch: master
+variables:
+  CI: false
