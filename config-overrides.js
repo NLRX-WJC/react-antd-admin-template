@@ -8,6 +8,7 @@ const path = require("path");
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
+process.env.CI === 'false'
 const addCustomize = () => (config) => {
   if (config.resolve) {
     config.resolve.extensions.push(".jsx");
