@@ -18,7 +18,5 @@ git commit -m 'deploy'
 
 # 如果使用 travis 持续集成
 git push -f https://${GITHUB_TOKEN}@github.com/NLRX-WJC/react-antd-admin-template.git master:gh-pages
-# 同时将打包好的文件push到码云
-git push -f https://${GITEE_TOKEN}@gitee.com/nlrx/react-antd-admin-template.git master
 
 cd -
