@@ -8,14 +8,9 @@ const path = require("path");
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
-process.env.CI = 'false'
 const addCustomize = () => (config) => {
   if (config.resolve) {
     config.resolve.extensions.push(".jsx");
-  }
-  // 去除生产环境打包时生成sourceMap
-  if (process.env.NODE_ENV === "production") {
-    process.env.GENERATE_SOURCEMAP = "false";
   }
   return config;
 };
