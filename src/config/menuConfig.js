@@ -9,7 +9,7 @@ const menuList = [
     icon: "home",
   },
   {
-    title: "文档",
+    title: "开发文档",
     path: "/doc",
     icon: "file",
   },
