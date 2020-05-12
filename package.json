@@ -23,6 +23,7 @@
     "less-loader": "^5.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-beautiful-dnd": "^13.0.0",
     "react-countup": "^4.3.3",
     "react-custom-scrollbars": "^4.2.1",
     "react-document-title": "^2.0.3",

@@ -7,6 +7,7 @@ const AdminPage = Loadable({loader: () => import(/*webpackChunkName:'AdminPage'*
 const GuestPage = Loadable({loader: () => import(/*webpackChunkName:'GuestPage'*/'@/views/permission/guestPage'),loading: Loading});
 const RichTextEditor = Loadable({loader: () => import(/*webpackChunkName:'RichTextEditor'*/'@/views/components-demo/richTextEditor'),loading: Loading});
 const Markdown = Loadable({loader: () => import(/*webpackChunkName:'Markdown'*/'@/views/components-demo/Markdown'),loading: Loading});
+const Draggable = Loadable({loader: () => import(/*webpackChunkName:'Draggable'*/'@/views/components-demo/draggable'),loading: Loading});
 const KeyboardChart = Loadable({loader: () => import(/*webpackChunkName:'KeyboardChart'*/'@/views/charts/keyboard'),loading: Loading});
 const LineChart = Loadable({loader: () => import(/*webpackChunkName:'LineChart'*/'@/views/charts/line'),loading: Loading});
 const MixChart = Loadable({loader: () => import(/*webpackChunkName:'MixChart'*/'@/views/charts/mixChart'),loading: Loading});
@@ -28,6 +29,7 @@ export default [
   { path: "/permission/guestPage", component: GuestPage, roles: ["guest"] },
   { path: "/components/richTextEditor", component: RichTextEditor, roles: ["admin","guest"] },
   { path: "/components/Markdown", component: Markdown, roles: ["admin","guest"] },
+  { path: "/components/draggable", component: Draggable, roles: ["admin","guest"] },
   { path: "/charts/keyboard", component: KeyboardChart, roles: ["admin","guest"] },
   { path: "/charts/line", component: LineChart, roles: ["admin","guest"] },
   { path: "/charts/mix-chart", component: MixChart, roles: ["admin","guest"] },

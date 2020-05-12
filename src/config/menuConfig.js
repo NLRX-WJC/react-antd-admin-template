@@ -48,6 +48,10 @@ const menuList = [
         title: "Markdown",
         path: "/components/Markdown",
       },
+      {
+        title: "拖拽列表",
+        path: "/components/draggable",
+      },
     ],
   },
   {
