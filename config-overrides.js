@@ -8,8 +8,14 @@ const path = require("path");
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
-process.env.CI = 'false'
+process.env.CI = "false";
 const addCustomize = () => (config) => {
+  if (config.output.publicPath) {
+    config.output.publicPath =
+      process.env.NODE_ENV === "production"
+        ? "/react-antd-admin-template/"
+        : "/";
+  }
   if (config.resolve) {
     config.resolve.extensions.push(".jsx");
   }
