@@ -45,17 +45,11 @@ class EditUserForm extends Component {
             {getFieldDecorator("role", {
               initialValue: role,
             })(
-              id === "admin" ? (
-                <Select style={{ width: 120 }} disabled>
-                  <Select.Option value="admin">admin</Select.Option>
-                  <Select.Option value="guest">guest</Select.Option>
-                </Select>
-              ) : (
-                <Select style={{ width: 120 }}>
-                  <Select.Option value="admin">admin</Select.Option>
-                  <Select.Option value="guest">guest</Select.Option>
-                </Select>
-              )
+              <Select style={{ width: 120 }} disabled={id === "admin"}>
+                <Select.Option value="admin">admin</Select.Option>
+                <Select.Option value="editor">editor</Select.Option>
+                <Select.Option value="guest">guest</Select.Option>
+              </Select>
             )}
           </Form.Item>
           <Form.Item label="用户描述:">

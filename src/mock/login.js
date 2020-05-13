@@ -1,6 +1,7 @@
 const tokens = {
   admin: "admin-token",
   guest: "guest-token",
+  editor: "editor-token",
 };
 
 const users = {
@@ -9,15 +10,21 @@ const users = {
     role: "admin",
     name: "难凉热血",
     avatar: "https://s1.ax1x.com/2020/04/28/J5hUaT.jpg",
-    description: "Super Administrator. Have access to view all pages.",
+    description: "拥有系统内所有菜单和路由权限",
+  },
+  "editor-token": {
+    id: "editor",
+    role: "editor",
+    name: "编辑员",
+    avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+    description:"可以看到除户管理页面之外的所有页面",
   },
   "guest-token": {
     id: "guest",
     role: "guest",
     name: "游客",
     avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-    description:
-      "Just a guest. Can only see the home page and the document page.",
+    description:"仅能看到Dashboard、开发文档、权限测试和关于作者四个页面",
   },
 };
 

@@ -29,7 +29,7 @@ const LayoutContent = (props) => {
   const { pathname } = location;
   const handleFilter = (route) => {
     // 过滤没有权限的页面
-    return !route.roles || route.roles.includes(role);
+    return role === "admin" || !route.roles || route.roles.includes(role);
   };
   return (
     <DocumentTitle title={getPageTitle(menuList, pathname)}>

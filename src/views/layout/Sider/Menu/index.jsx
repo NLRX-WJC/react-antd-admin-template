@@ -27,7 +27,7 @@ class Meun extends Component {
   filterMenuItem = (item) => {
     const { roles } = item;
     const { role, name } = this.props;
-    if (name === "admin" || !roles || roles.includes(role)) {
+    if (role === "admin" || !roles || roles.includes(role)) {
       return true;
     } else if (item.children) {
       // 如果当前用户有此item的某个子item的权限
