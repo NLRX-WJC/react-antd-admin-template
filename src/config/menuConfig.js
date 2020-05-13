@@ -131,6 +131,12 @@ const menuList = [
     icon: "copy",
   },
   {
+    title: "用户管理",
+    path: "/user",
+    icon: "usergroup-add",
+    roles:["admin"]
+  },
+  {
     title: "关于作者",
     path: "/about",
     icon: "user",

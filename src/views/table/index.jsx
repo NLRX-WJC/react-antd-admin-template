@@ -12,7 +12,7 @@ import {
   Select
 } from "antd";
 import { tableList, deleteItem,editItem } from "@/api/table";
-import EditForm from "./Forms/editForm"
+import EditForm from "./forms/editForm"
 const { Column } = Table;
 const { Panel } = Collapse;
 class TableComponent extends Component {
@@ -133,7 +133,6 @@ class TableComponent extends Component {
         'star': "".padStart(fieldsValue['star'], '★'),
         'date': fieldsValue['date'].format('YYYY-MM-DD HH:mm:ss'),
       };
-      console.log('Received values of form: ', values);
       this.setState({ editModalLoading: true, });
       editItem(values).then((response) => {
         form.resetFields();
@@ -151,9 +150,6 @@ class TableComponent extends Component {
     this.setState({
       editModalVisible: false,
     });
-  };
-  saveFormRef = formRef => {
-    this.formRef = formRef;
   };
   render() {
     return (
@@ -233,7 +229,7 @@ class TableComponent extends Component {
         />
         <EditForm
           currentRowData={this.state.currentRowData}
-          wrappedComponentRef={this.saveFormRef}
+          wrappedComponentRef={formRef => this.formRef = formRef}
           visible={this.state.editModalVisible}
           confirmLoading={this.state.editModalLoading}
           onCancel={this.handleCancel}
