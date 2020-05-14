@@ -19,7 +19,6 @@ class TypingCard extends React.Component {
   render() {
     return (
       <Card
-        hoverable
         bordered={false}
         className="card-item"
         title={this.props.title}
