@@ -6,8 +6,6 @@ import "./index.less";
 /**
  * 根据当前浏览器地址栏的路由地址，在menuConfig中查找路由跳转的路径
  * 如路由地址为/charts/keyboard,则查找到的路径为[{title: "图表",...},{title: "键盘图表",...}]
- * @param {*} menuList
- * @param {*} pathname
  */
 const getPath = (menuList, pathname) => {
   let temppath = [];

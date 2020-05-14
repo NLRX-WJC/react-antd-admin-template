@@ -4,15 +4,15 @@ import { Link, withRouter } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars";
 import { connect } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { addTaglist } from "@/store/actions";
+import { getMenuItemInMenuListByProperty } from "@/utils";
 import menuList from "@/config/menuConfig";
 import "./index.less";
 const SubMenu = Menu.SubMenu;
 // 重新记录数组顺序
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
-
   const [removed] = result.splice(startIndex, 1);
-
   result.splice(endIndex, 0, removed);
   return result;
 };
@@ -97,6 +97,11 @@ class Meun extends Component {
     });
   };
 
+  handleMenuSelect = ({ key }) => {
+    let menuItem = getMenuItemInMenuListByProperty(menuList,'path',key)
+    this.props.addTaglist(menuItem);
+  };
+
   componentWillMount() {
     const menuTreeNode = this.getMenuNodes(menuList);
     this.setState({
@@ -128,6 +133,7 @@ class Meun extends Component {
                           <Menu
                             mode="inline"
                             theme="dark"
+                            onSelect={this.handleMenuSelect}
                             selectedKeys={[path]}
                             defaultOpenKeys={openKey}
                           >
@@ -147,4 +153,4 @@ class Meun extends Component {
   }
 }
 
-export default connect((state) => state.user)(withRouter(Meun));
+export default connect((state) => state.user, { addTaglist })(withRouter(Meun));

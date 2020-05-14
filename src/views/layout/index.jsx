@@ -3,6 +3,7 @@ import Content from "./Content";
 import Header from "./Header";
 import RightPanel from "./RightPanel";
 import Sider from "./Sider";
+import TagsView from "./TagsView";
 import { Layout } from "antd";
 const Main = () => {
   return (
@@ -10,6 +11,7 @@ const Main = () => {
       <Sider />
       <Layout>
         <Header />
+        <TagsView/>
         <Content />
         <RightPanel />
       </Layout>

@@ -3,23 +3,16 @@ import { Redirect, withRouter, Route, Switch } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import { connect } from "react-redux";
 import { Layout } from "antd";
+import { getMenuItemInMenuListByProperty } from "@/utils";
 import routeList from "@/config/routeMap";
 import menuList from "@/config/menuConfig";
 const { Content } = Layout;
 
 const getPageTitle = (menuList, pathname) => {
-  let stack = [];
   let title = "Ant Design Pro";
-  stack = stack.concat(menuList);
-
-  while (stack.length) {
-    let cur = stack.shift();
-    if (cur.children && cur.children.length > 0) {
-      stack = cur.children.concat(stack);
-    }
-    if (pathname === cur.path) {
-      title = `${cur.title} - Ant Design Pro`;
-    }
+  let item = getMenuItemInMenuListByProperty(menuList, "path", pathname);
+  if (item) {
+    title = `${item.title} - Ant Design Pro`;
   }
   return title;
 };
@@ -33,7 +26,7 @@ const LayoutContent = (props) => {
   };
   return (
     <DocumentTitle title={getPageTitle(menuList, pathname)}>
-      <Content style={{"height":"calc(100% - 100px)"}}>
+      <Content style={{ height: "calc(100% - 100px)" }}>
         <Switch>
           <Redirect exact from="/" to="/dashboard" />
           {routeList.map((route) => {
