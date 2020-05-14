@@ -222,6 +222,7 @@ class TableComponent extends Component {
           pageSizeOptions={["10", "20", "40"]}
           showTotal={(total) => `共${total}条数据`}
           onChange={this.changePage}
+          current={this.state.listQuery.pageNumber}
           onShowSizeChange={this.changePageSize}
           showSizeChanger
           showQuickJumper
