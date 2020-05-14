@@ -28,7 +28,7 @@ export default [
   { path: "/dashboard", component: Dashboard, roles: ["admin","editor","guest"] },
   { path: "/doc", component: Doc, roles: ["admin","editor","guest"] },
   { path: "/guide", component: Guide, roles: ["admin","editor"] },
-  { path: "/permission/explanation", component: Explanation, roles: ["admin","editor","guest"] },
+  { path: "/permission/explanation", component: Explanation, roles: ["admin"] },
   { path: "/permission/adminPage", component: AdminPage, roles: ["admin"] },
   { path: "/permission/guestPage", component: GuestPage, roles: ["guest"] },
   { path: "/permission/editorPage", component: EditorPage, roles: ["editor"] },

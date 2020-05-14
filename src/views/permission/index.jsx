@@ -14,9 +14,6 @@ export default () => {
   `;
   return (
     <div className="app-container">
-      <ul>
-        <li></li>
-      </ul>
       <TypingCard title="权限说明" source={cardContent} />
     </div>
   );

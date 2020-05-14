@@ -5,7 +5,7 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import TypingCard from "@/components/TypingCard";
 const Markdown = () => {
-  const cardContent = `此页面用到的Markdown编辑器是<a href="https://github.com/nhn/tui.editor/tree/master/apps/react-editor">tui.editor(React版)</a>`;
+  const cardContent = `此页面用到的Markdown编辑器是<a href="https://github.com/nhn/tui.editor/tree/master/apps/react-editor" target="_blank">tui.editor(React版)</a>`;
   return (
     <div className="app-container">
       <TypingCard title="Markdown编辑器" source={cardContent} />

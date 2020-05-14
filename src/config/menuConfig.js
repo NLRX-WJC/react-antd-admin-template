@@ -29,7 +29,7 @@ const menuList = [
       {
         title: "权限说明",
         path: "/permission/explanation",
-        roles:["admin","editor","guest"]
+        roles:["admin"]
       },
       {
         title: "admin页面",
