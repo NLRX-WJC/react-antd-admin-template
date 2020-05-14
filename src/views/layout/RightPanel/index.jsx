@@ -7,6 +7,7 @@ class RightPanel extends Component {
   state = {
     sidebarLogo: true,
     fixedHeader: true,
+    tagsView: true,
   };
   sidebarLogoChange = (checked) => {
     this.setState({ sidebarLogo: checked });
@@ -16,12 +17,17 @@ class RightPanel extends Component {
     this.setState({ fixedHeader: checked });
     this.props.changeSetting({ key: "fixedHeader", value: checked });
   };
+  tagsViewChange = (checked) => {
+    this.setState({ tagsView: checked });
+    this.props.changeSetting({ key: "tagsView", value: checked });
+  };
   handleCopy = (e) => {
     let config = `
     export default {
       showSettings: true,
       sidebarLogo: ${this.state.sidebarLogo},
       fixedHeader: ${this.state.fixedHeader},
+      tagsView: ${this.state.tagsView},
     }
     `;
     clip(config, e);
@@ -32,6 +38,7 @@ class RightPanel extends Component {
       toggleSettingPanel,
       sidebarLogo,
       fixedHeader,
+      tagsView,
     } = this.props;
     return (
       <div className="rightSettings">
@@ -66,6 +73,20 @@ class RightPanel extends Component {
                 unCheckedChildren="关"
                 defaultChecked={fixedHeader}
                 onChange={this.fixedHeaderChange}
+              />
+            </Col>
+          </Row>
+          <Divider dashed />
+          <Row>
+            <Col span={12}>
+              <span>开启 Tags-View</span>
+            </Col>
+            <Col span={12}>
+              <Switch
+                checkedChildren="开"
+                unCheckedChildren="关"
+                defaultChecked={tagsView}
+                onChange={this.tagsViewChange}
               />
             </Col>
           </Row>
