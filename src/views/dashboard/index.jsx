@@ -37,7 +37,7 @@ class Home extends Component {
   };
   render() {
     return (
-      <div className="dashboard-container">
+      <div className="app-container">
         <a
           href="https://github.com/NLRX-WJC/react-antd-admin-template"
           target="_blank"
