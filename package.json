@@ -1,6 +1,8 @@
 {
-  "name": "react_admin_template",
-  "version": "0.1.0",
+  "name": "react_antd_admin_template",
+  "version": "1.0.0",
+  "author": "NLRX <414961362@qq.com>",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
