@@ -11,15 +11,13 @@
 
 - [在线预览](https://nlrx-wjc.github.io/react-antd-admin-template/)
 - [Gitee在线预览(国内用户可访问该地址)](https://nlrx.gitee.io/react-antd-admin-template/)
-- 开发文档正在编写中...
-
+- [开发文档](https://nlrx-wjc.github.io/react-antd-admin-template-doc/) 目前还在持续编写完善中...
 
 ![](./guide.gif)
 
-
 # 开发
 
-```
+```bash
 # 克隆项目
 git clone https://github.com/NLRX-WJC/react-antd-admin-template.git
 

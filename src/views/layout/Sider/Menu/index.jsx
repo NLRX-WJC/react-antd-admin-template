@@ -26,7 +26,7 @@ class Meun extends Component {
   // filterMenuItem用来根据配置信息筛选可以显示的菜单项
   filterMenuItem = (item) => {
     const { roles } = item;
-    const { role, name } = this.props;
+    const { role } = this.props;
     if (role === "admin" || !roles || roles.includes(role)) {
       return true;
     } else if (item.children) {
