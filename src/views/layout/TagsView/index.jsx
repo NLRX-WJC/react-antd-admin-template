@@ -1,16 +1,13 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-import Tags from "./components/Tags";
-// import Dropdown from "./component/Dropdown";
+import TagList from "./components/TagList";
 import "./index.less";
 
 const TagsView = () => {
   return (
-      <div className="tags-row-wrap">
-        <Tags />
-        {/* <Dropdown /> */}
-      </div>
+    <div className="tagsView-container">
+      <TagList />
+    </div>
   );
 };
 
-export default withRouter(TagsView);
+export default TagsView;

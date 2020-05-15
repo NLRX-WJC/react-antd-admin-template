@@ -97,8 +97,8 @@ class Meun extends Component {
     });
   };
 
-  handleMenuSelect = ({ key }) => {
-    let menuItem = getMenuItemInMenuListByProperty(menuList,'path',key)
+  handleMenuSelect = ({ key = "/dashboard" }) => {
+    let menuItem = getMenuItemInMenuListByProperty(menuList, "path", key);
     this.props.addTaglist(menuItem);
   };
 
@@ -107,6 +107,7 @@ class Meun extends Component {
     this.setState({
       menuTreeNode,
     });
+    this.handleMenuSelect(this.state.openKey);
   }
   render() {
     const path = this.props.location.pathname;

@@ -1,13 +1,11 @@
-.tags-row-wrap {
+.tagsView-container {
   white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
   width: 100%;
   height: 36px;
   line-height: 36px;
   border-bottom: 1px solid #d8dce5;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
-  background-color: #fff;
+  background: #fff;
   padding: 0 16px;
   .tags-wrap {
     padding: 0;
@@ -15,4 +13,11 @@
       display: inline-block;
     }
   }
+}
+
+.scrollbar-container {
+  overflow-y: hidden !important;
+}
+.scrollbar-track-vertical {
+  visibility: hidden !important;
 }
