@@ -22,6 +22,7 @@
     "jszip": "^3.4.0",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
+    "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
