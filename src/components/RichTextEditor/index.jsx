@@ -5,7 +5,6 @@ import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import TypingCard from '@/components/TypingCard'
 import "./index.less"
 class RichTextEditor extends Component {
   state = {
@@ -17,12 +16,9 @@ class RichTextEditor extends Component {
     });
   };
   render() { 
-    const cardContent = `此页面用到的富文本编辑是<a href="https://github.com/jpuri/react-draft-wysiwyg">react-draft-wysiwyg</a>`
     const { editorState } = this.state;
     return ( 
-      <div className="app-container">
-        <TypingCard title='富文本编辑器' source={cardContent} />
-        <br/>
+      <div>
         <Card bordered={false}>
           <Editor
             editorState={editorState}
@@ -50,6 +46,5 @@ class RichTextEditor extends Component {
      );
   }
 }
-
 
 export default RichTextEditor;
