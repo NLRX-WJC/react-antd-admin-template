@@ -9,6 +9,7 @@
 
   & .sidebar-logo {
     width: 60px;
+    animation: sidebar-logo-spin infinite 10s linear;
   }
 
   & .sidebar-title {
@@ -20,5 +21,14 @@
     font-size: 14px;
     font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
     vertical-align: middle;
+  }
+}
+
+@keyframes sidebar-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
