@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars";
 import { connect } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { addTaglist } from "@/store/actions";
+import { addTag } from "@/store/actions";
 import { getMenuItemInMenuListByProperty } from "@/utils";
 import menuList from "@/config/menuConfig";
 import "./index.less";
@@ -99,7 +99,7 @@ class Meun extends Component {
 
   handleMenuSelect = ({ key = "/dashboard" }) => {
     let menuItem = getMenuItemInMenuListByProperty(menuList, "path", key);
-    this.props.addTaglist(menuItem);
+    this.props.addTag(menuItem);
   };
 
   componentWillMount() {
@@ -154,4 +154,4 @@ class Meun extends Component {
   }
 }
 
-export default connect((state) => state.user, { addTaglist })(withRouter(Meun));
+export default connect((state) => state.user, { addTag })(withRouter(Meun));

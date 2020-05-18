@@ -4,7 +4,7 @@ const initState = {
 };
 export default function app(state = initState, action) {
   switch (action.type) {
-    case types.TAGSVIEW_ADD_TAGLIST:
+    case types.TAGSVIEW_ADD_TAG:
       const tag = action.tag;
       if (state.taglist.includes(tag)) {
         return state;
@@ -14,7 +14,7 @@ export default function app(state = initState, action) {
           taglist: [...state.taglist, tag],
         };
       }
-    case types.TAGSVIEW_DELETE_TAGLIST:
+    case types.TAGSVIEW_DELETE_TAG:
       return {
         ...state,
         taglist: [...state.taglist.filter((item) => item !== action.tag)],
@@ -22,7 +22,16 @@ export default function app(state = initState, action) {
     case types.TAGSVIEW_EMPTY_TAGLIST:
       return {
         ...state,
-        taglist: [],
+        taglist: [
+          ...state.taglist.filter((item) => item.path === "/dashboard"),
+        ],
+      };
+    case types.TAGSVIEW_CLOSE_OTHER_TAGS:
+      return {
+        ...state,
+        taglist: [
+          ...state.taglist.filter((item) => item.path === "/dashboard" || item === action.tag),
+        ],
       };
     default:
       return state;
