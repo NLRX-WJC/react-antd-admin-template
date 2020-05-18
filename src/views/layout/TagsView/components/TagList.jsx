@@ -92,11 +92,6 @@ class TagList extends Component {
     this.props.history.push("/dashboard");
     this.closeContextMenu();
   };
-  handleRefreshTag = () => {
-    const { path } = this.state.currentTag;
-    this.props.history.push(path);
-    this.closeContextMenu();
-  };
   handleCloseOtherTags = () => {
     const currentTag = this.state.currentTag;
     const { path } = currentTag;
@@ -144,7 +139,6 @@ class TagList extends Component {
             style={{ left: `${left}px`, top: `${top}px` }}
             ref={this.contextMenuContainer}
           >
-            <li onClick={this.handleRefreshTag}>刷新</li>
             <li onClick={this.handleCloseOtherTags}>关闭其他</li>
             <li onClick={this.handleCloseAllTags}>关闭所有</li>
           </ul>
