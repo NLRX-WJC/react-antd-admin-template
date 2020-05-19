@@ -3,15 +3,11 @@ import { Redirect, withRouter, Route, Switch } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import { connect } from "react-redux";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import NProgress from "nprogress"; // progress bar
-import "nprogress/nprogress.css"; // progress bar style
-
 import { Layout } from "antd";
 import { getMenuItemInMenuListByProperty } from "@/utils";
 import routeList from "@/config/routeMap";
 import menuList from "@/config/menuConfig";
 const { Content } = Layout;
-NProgress.configure({ showSpinner: false }); // NProgress Configuration
 
 const getPageTitle = (menuList, pathname) => {
   let title = "Ant Design Pro";
@@ -38,8 +34,6 @@ const LayoutContent = (props) => {
             timeout={500}
             classNames="fade"
             exit={false}
-            onEnter={() => NProgress.start()}
-            onEntered={() => NProgress.done()}
           >
             <Switch location={location}>
               <Redirect exact from="/" to="/dashboard" />
