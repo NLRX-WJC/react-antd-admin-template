@@ -43,10 +43,10 @@ const LayoutHeader = (props) => {
   };
   const menu = (
     <Menu onClick={onClick}>
-      <Menu.Item key="0">
+      <Menu.Item key="dashboard">
         <Link to="/dashboard">首页</Link>
       </Menu.Item>
-      <Menu.Item key="0">
+      <Menu.Item key="project">
         <a
           target="_blank"
           href="https://github.com/NLRX-WJC/react-antd-admin-template"
