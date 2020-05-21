@@ -101,6 +101,7 @@ class TableComponent extends Component {
       (state) => ({
         listQuery: {
           ...state.listQuery,
+          pageNumber: 1,
           pageSize,
         },
       }),
