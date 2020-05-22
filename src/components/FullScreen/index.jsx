@@ -14,22 +14,14 @@ const click = () => {
 const FullScreen = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const init = () => {
-    if (screenfull.isEnabled) {
-      screenfull.on("change", change);
-    }
-  };
-
   const change = () => {
     setIsFullscreen(screenfull.isFullscreen);
   };
 
   useEffect(() => {
-    init();
+    screenfull.isEnabled && screenfull.on("change", change);
     return () => {
-      if (screenfull.isEnabled) {
-        screenfull.off("change", change);
-      }
+      screenfull.isEnabled && screenfull.off("change", change);
     };
   }, []);
 
