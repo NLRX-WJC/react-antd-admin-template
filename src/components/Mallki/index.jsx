@@ -1,25 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
 import { PropTypes } from "prop-types";
-import './index.less'
-class Mallki extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    text: PropTypes.string,
-  };
-  static defaultProps = {
-    className: "",
-    text: "vue-element-admin",
-  };
-  render() {
-    const { className, text } = this.props;
-    return (
-      <a className={`mallki ${className}`} href="#/">
-        {text}
-        <span data-letters={text} />
-        <span data-letters={text} />
-      </a>
-    );
-  }
-}
+import "./index.less";
+const Mallki = (props) => {
+  const { className, text } = props;
+  return (
+    <a className={`mallki ${className}`} href="#/">
+      {text}
+      <span data-letters={text} />
+      <span data-letters={text} />
+    </a>
+  );
+};
+
+Mallki.prototype = {
+  className: PropTypes.string,
+  text: PropTypes.string,
+};
+
+Mallki.defaultProps = {
+  className: "",
+  text: "vue-element-admin",
+};
 
 export default Mallki;
