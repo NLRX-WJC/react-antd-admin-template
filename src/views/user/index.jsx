@@ -48,7 +48,6 @@ class User extends Component {
       if (err) {
         return;
       }
-      console.log('Received values of form: ', values);
       this.setState({ editModalLoading: true, });
       editUser(values).then((response) => {
         form.resetFields();

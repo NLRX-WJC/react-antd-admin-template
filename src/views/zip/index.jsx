@@ -80,7 +80,6 @@ class Zip extends Component {
       const filterVal = ["id", "title", "author", "readings", "date"];
       const list = type === "all" ? this.state.list : this.state.selectedRows;
       const data = this.formatJson(filterVal, list);
-      console.log("data", data);
 
       zip.export_txt_to_zip(
         tHeader,
