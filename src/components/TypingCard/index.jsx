@@ -28,7 +28,7 @@ const TypingCard = (props) => {
   );
 };
 
-TypingCard.prototype = {
+TypingCard.propTypes = {
   title: "",
   source: "",
 };

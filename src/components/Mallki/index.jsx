@@ -12,7 +12,7 @@ const Mallki = (props) => {
   );
 };
 
-Mallki.prototype = {
+Mallki.propTypes = {
   className: PropTypes.string,
   text: PropTypes.string,
 };
