@@ -1,8 +1,16 @@
 import * as types from "../action-types";
+import { IMenuConfig } from "@/config/menuConfig";
+import { AnyAction } from "redux";
+export interface ITagsViewState {
+  taglist: IMenuConfig[];
+}
 const initState = {
   taglist: [],
 };
-export default function app(state = initState, action) {
+export default function app(
+  state: ITagsViewState = initState,
+  action: AnyAction
+): ITagsViewState {
   switch (action.type) {
     case types.TAGSVIEW_ADD_TAG:
       const tag = action.tag;
@@ -30,7 +38,9 @@ export default function app(state = initState, action) {
       return {
         ...state,
         taglist: [
-          ...state.taglist.filter((item) => item.path === "/dashboard" || item === action.tag),
+          ...state.taglist.filter(
+            (item) => item.path === "/dashboard" || item === action.tag
+          ),
         ],
       };
     default:

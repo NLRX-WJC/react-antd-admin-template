@@ -1,5 +1,6 @@
 import * as types from "../action-types";
-export const addTag = (tag) => {
+import { IMenuConfig } from "@/config/menuConfig";
+export const addTag = (tag:IMenuConfig) => {
   return {
     type: types.TAGSVIEW_ADD_TAG,
     tag
@@ -12,14 +13,14 @@ export const emptyTaglist = () => {
   };
 };
 
-export const deleteTag = (tag) => {
+export const deleteTag = (tag:IMenuConfig) => {
   return {
     type: types.TAGSVIEW_DELETE_TAG,
     tag
   };
 };
 
-export const closeOtherTags = (tag) => {
+export const closeOtherTags = (tag:IMenuConfig) => {
   return {
     type: types.TAGSVIEW_CLOSE_OTHER_TAGS,
     tag

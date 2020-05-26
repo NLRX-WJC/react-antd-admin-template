@@ -1,7 +1,8 @@
 import { setUserToken, resetUser } from "./user";
 import { reqLogin, reqLogout } from "@/api/login";
 import { setToken, removeToken } from "@/utils/auth";
-export const login = (username, password) => (dispatch) => {
+import { Dispatch } from "redux";
+export const login = (username:string, password:string) => (dispatch: Dispatch) => {
   return new Promise((resolve, reject) => {
     reqLogin({ username: username.trim(), password: password })
       .then((response) => {
@@ -22,7 +23,7 @@ export const login = (username, password) => (dispatch) => {
   });
 };
 
-export const logout = (token) => (dispatch) => {
+export const logout = (token:string) => (dispatch: Dispatch) => {
   return new Promise((resolve, reject) => {
     reqLogout(token)
       .then((response) => {
