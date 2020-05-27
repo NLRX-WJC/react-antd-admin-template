@@ -29,6 +29,11 @@ const TypingCard = (props) => {
 };
 
 TypingCard.propTypes = {
+  title: PropTypes.string,
+  source: PropTypes.string,
+};
+
+TypingCard.defaultProps = {
   title: "",
   source: "",
 };
