@@ -1,11 +1,11 @@
-import React from "react";
+import * as React from "react";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/es/locale/zh_CN";
 import store from "./store";
 import Router from "./router";
 
-const App = () => {
+const App: React.SFC = () => {
   return (
     <ConfigProvider locale={zhCN}>
       <Provider store={store}>

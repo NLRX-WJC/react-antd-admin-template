@@ -9,8 +9,8 @@ function clipboardError() {
   message.error("复制失败");
 }
 
-export default function handleClipboard(text, event) {
-  const clipboard = new Clipboard(event.target, {
+export default function handleClipboard(text: string, event: MouseEvent) {
+  const clipboard = new Clipboard(event.target as Element, {
     text: () => text,
   });
   clipboard.on("success", () => {
@@ -21,5 +21,5 @@ export default function handleClipboard(text, event) {
     clipboardError();
     clipboard.destroy();
   });
-  clipboard.onClick(event);
+  (clipboard as any).onClick(event);
 }
