@@ -172,5 +172,11 @@ const menuList = [
     icon: "user",
     roles:["admin","editor","guest"]
   },
+  {
+    title: "Bug收集",
+    path: "/bug",
+    icon: "bug",
+    roles:["admin"]
+  },
 ];
 export default menuList;

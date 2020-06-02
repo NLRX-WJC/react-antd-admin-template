@@ -3,6 +3,8 @@ import { getUserInfo, setUserToken, setUserInfo, resetUser } from "./user";
 import { toggleSiderBar, toggleSettingPanel } from "./app";
 import { changeSetting } from "./settings";
 import { addTag, emptyTaglist, deleteTag, closeOtherTags } from "./tagsView";
+import { addBug } from "./monitor";
+
 export {
   login,
   logout,
@@ -17,4 +19,5 @@ export {
   emptyTaglist,
   deleteTag,
   closeOtherTags,
+  addBug
 };

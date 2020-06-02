@@ -10,12 +10,12 @@ function resolve(dir) {
 }
 process.env.CI = "false";
 const addCustomize = () => (config) => {
-  if (config.output.publicPath) {
-    config.output.publicPath =
-      process.env.NODE_ENV === "production"
-        ? "/react-antd-admin-template/"
-        : "/";
-  }
+  // if (config.output.publicPath) {
+  //   config.output.publicPath =
+  //     process.env.NODE_ENV === "production"
+  //       ? "/react-antd-admin-template/"
+  //       : "/";
+  // }
   if (config.resolve) {
     config.resolve.extensions.push(".jsx");
   }

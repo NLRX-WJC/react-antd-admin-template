@@ -65,7 +65,7 @@
     ]
   },
   "devDependencies": {
-    "@sentry/browser": "^5.15.5",
+    "user-agent": "^1.0.4",
     "babel-plugin-import": "^1.13.0",
     "commitizen": "^4.0.3",
     "customize-cra": "^0.9.1",
