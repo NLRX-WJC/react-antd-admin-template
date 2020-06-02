@@ -65,11 +65,12 @@
     ]
   },
   "devDependencies": {
+    "@sentry/browser": "^5.15.5",
     "babel-plugin-import": "^1.13.0",
-    "customize-cra": "^0.9.1",
-    "mockjs": "^1.1.0",
     "commitizen": "^4.0.3",
+    "customize-cra": "^0.9.1",
     "cz-conventional-changelog": "^3.0.2",
+    "mockjs": "^1.1.0",
     "react-app-rewired": "^2.1.5"
   },
   "config": {
