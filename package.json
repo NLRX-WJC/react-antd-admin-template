@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@toast-ui/react-editor": "^2.1.0",
     "antd": "^3.17.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "clipboard": "^2.0.6",
     "draft-js": "^0.11.5",
     "draftjs-to-html": "^0.9.1",
