@@ -10,7 +10,7 @@ const menuList = [
     roles:["admin","editor","guest"]
   },
   {
-    title: "开发文档",
+    title: "作者博客",
     path: "/doc",
     icon: "file",
     roles:["admin","editor","guest"]

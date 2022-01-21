@@ -24,7 +24,7 @@ const users = {
     role: "guest",
     name: "游客",
     avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-    description:"仅能看到Dashboard、开发文档、权限测试和关于作者四个页面",
+    description:"仅能看到Dashboard、作者博客、权限测试和关于作者四个页面",
   },
 };
 
