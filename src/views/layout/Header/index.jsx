@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Icon, Menu, Dropdown, Modal, Layout, Avatar } from "antd";
 import { Link } from "react-router-dom";
 import { logout, getUserInfo } from "@/store/actions";
+import { emptyTaglist } from "@/store/actions";
 import FullScreen from "@/components/FullScreen";
 import Settings from "@/components/Settings";
 import Hamburger from "@/components/Hamburger";
@@ -19,6 +20,7 @@ const LayoutHeader = (props) => {
     getUserInfo,
     showSettings,
     fixedHeader,
+    emptyTaglist,
   } = props;
   token && getUserInfo(token);
   const handleLogout = (token) => {
@@ -28,6 +30,7 @@ const LayoutHeader = (props) => {
       okText: "确定",
       cancelText: "取消",
       onOk: () => {
+        emptyTaglist()
         logout(token);
       },
     });
@@ -111,6 +114,7 @@ const mapStateToProps = (state) => {
     ...state.app,
     ...state.user,
     ...state.settings,
+    ...state.tagsView,
   };
 };
-export default connect(mapStateToProps, { logout, getUserInfo })(LayoutHeader);
+export default connect(mapStateToProps, { logout, getUserInfo, emptyTaglist })(LayoutHeader);
