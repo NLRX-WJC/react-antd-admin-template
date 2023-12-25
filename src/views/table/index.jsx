@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Table,
   Tag,
@@ -11,13 +11,21 @@ import {
   message,
   Select
 } from "antd";
-import { tableList, deleteItem,editItem } from "@/api/table";
+
+import Icon from '@ant-design/icons'
+import * as icons from '@ant-design/icons';
+
+import { tableList, deleteItem, editItem } from "@/api/table";
 import EditForm from "./forms/editForm"
 const { Column } = Table;
 const { Panel } = Collapse;
-class TableComponent extends Component {
-  _isMounted = false; // 这个变量是用来标志当前组件是否挂载
-  state = {
+const TableComponent = (props) => {
+  const titleInputRef = useRef(null);
+  const statusSelectRef = useRef(null);
+  const starSelectRef = useRef(null);
+
+
+  const [state, setState] = useState({
     list: [],
     loading: false,
     total: 0,
@@ -26,7 +34,7 @@ class TableComponent extends Component {
       pageSize: 10,
       title: "",
       star: "",
-      status:""
+      status: ""
     },
     editModalVisible: false,
     editModalLoading: false,
@@ -39,207 +47,228 @@ class TableComponent extends Component {
       status: "published",
       title: ""
     }
-  };
-  fetchData = () => {
-    this.setState({ loading: true });
-    tableList(this.state.listQuery).then((response) => {
-      this.setState({ loading: false });
+  });
+
+  useEffect(() => {
+    fetchData();
+  }, [state.listQuery, state.editModalVisible]);
+
+  const fetchData = () => {
+    setState({ ...state, loading: true });
+    tableList(state.listQuery).then((response) => {
+
+      setState({ ...state, loading: false });
       const list = response.data.data.items;
       const total = response.data.data.total;
-      if (this._isMounted) {
-        this.setState({ list, total });
+
+      const resStr = JSON.stringify(response);
+
+      setState({ ...state, list, total });
+    });
+  };
+
+  // function stringify(obj) {
+  //   let cache = [];
+  //   let str = JSON.stringify(obj, function (key, value) {
+  //     if (typeof value === "object" && value !== null) {
+  //       if (cache.indexOf(value) !== -1) {
+  //         // Circular reference found, discard key
+  //         return;
+  //       }
+  //       // Store value in our collection
+  //       cache.push(value);
+  //     }
+  //     return value;
+  //   });
+  //   cache = null; // reset the cache
+  //   return str;
+  // }
+
+
+
+  const filterTitleChange = (e) => {
+    let value = e.target.value
+    setState({
+      ...state,
+      listQuery: {
+        ...state.listQuery,
+        pageNumber: 1,
+        title: value,
       }
     });
   };
-  componentDidMount() {
-    this._isMounted = true;
-    this.fetchData();
-  }
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-  filterTitleChange = (e) => {
-    let value = e.target.value
-    this.setState((state) => ({
+  const filterStatusChange = (value) => {
+    setState({
+      ...state,
       listQuery: {
         ...state.listQuery,
-        title:value,
+        pageNumber: 1,
+        status: value,
       }
-    }));
+    });
   };
-  filterStatusChange = (value) => {
-    this.setState((state) => ({
+  const filterStarChange = (value) => {
+    setState({
+      ...state,
       listQuery: {
         ...state.listQuery,
-        status:value,
+        pageNumber: 1,
+        star: value,
       }
-    }));
+    });
   };
-  filterStarChange  = (value) => {
-    this.setState((state) => ({
+  const changePage = (pageNumber, pageSize) => {
+    setState({
+      ...state,
       listQuery: {
         ...state.listQuery,
-        star:value,
-      }
-    }));
+        pageNumber,
+      },
+    });
+
+    // fetchData();
   };
-  changePage = (pageNumber, pageSize) => {
-    this.setState(
-      (state) => ({
-        listQuery: {
-          ...state.listQuery,
-          pageNumber,
-        },
-      }),
-      () => {
-        this.fetchData();
-      }
-    );
+  const changePageSize = (current, pageSize) => {
+    setState({
+      ...state,
+      listQuery: {
+        ...state.listQuery,
+        pageNumber: 1,
+        pageSize,
+      },
+    });
+
+    // fetchData();
   };
-  changePageSize = (current, pageSize) => {
-    this.setState(
-      (state) => ({
-        listQuery: {
-          ...state.listQuery,
-          pageNumber: 1,
-          pageSize,
-        },
-      }),
-      () => {
-        this.fetchData();
-      }
-    );
-  };
-  handleDelete = (row) => {
-    deleteItem({id:row.id}).then(res => {
+  const handleDelete = (row) => {
+    deleteItem({ id: row.id }).then(res => {
       message.success("删除成功")
-      this.fetchData();
+      fetchData();
     })
   }
-  handleEdit = (row) => {
-    this.setState({
-      currentRowData:Object.assign({}, row),
+  const handleEdit = (row) => {
+    setState({
+      ...state,
+      currentRowData: Object.assign({}, row),
       editModalVisible: true,
     });
   };
 
-  handleOk = _ => {
-    const { form } = this.formRef.props;
-    form.validateFields((err, fieldsValue) => {
-      if (err) {
-        return;
-      }
+  const handleOk = _ => {
+    const { form } = formRef.props;
+    form.validateFields().then((fieldsValue) => {
+
       const values = {
         ...fieldsValue,
         'star': "".padStart(fieldsValue['star'], '★'),
         'date': fieldsValue['date'].format('YYYY-MM-DD HH:mm:ss'),
       };
-      this.setState({ editModalLoading: true, });
+      setState({ ...state, editModalLoading: true, });
       editItem(values).then((response) => {
         form.resetFields();
-        this.setState({ editModalVisible: false, editModalLoading: false });
+        setState({ ...state, editModalVisible: false, editModalLoading: false });
         message.success("编辑成功!")
-        this.fetchData()
+        // fetchData()
       }).catch(e => {
         message.success("编辑失败,请重试!")
       })
-      
+
     });
   };
 
-  handleCancel = _ => {
-    this.setState({
+  const handleCancel = _ => {
+    setState({
+      ...state,
       editModalVisible: false,
     });
   };
-  render() {
-    return (
-      <div className="app-container">
-        <Collapse defaultActiveKey={["1"]}>
-          <Panel header="筛选" key="1">
-            <Form layout="inline">
-              <Form.Item label="标题:">
-                <Input onChange={this.filterTitleChange} />
-              </Form.Item>
-              <Form.Item label="类型:">
-                <Select
-                  style={{ width: 120 }}
-                  onChange={this.filterStatusChange}>
-                  <Select.Option value="published">published</Select.Option>
-                  <Select.Option value="draft">draft</Select.Option>
-                </Select>
-              </Form.Item>
-              <Form.Item label="推荐指数:">
-                <Select
-                  style={{ width: 120 }}
-                  onChange={this.filterStarChange}>
-                  <Select.Option value={1}>★</Select.Option>
-                  <Select.Option value={2}>★★</Select.Option>
-                  <Select.Option value={3}>★★★</Select.Option>
-                </Select>
-              </Form.Item>
-              <Form.Item>
-                <Button type="primary" icon="search" onClick={this.fetchData}>
-                  搜索
-                </Button>
-              </Form.Item>
-            </Form>
-          </Panel>
-        </Collapse>
-        <br />
-        <Table
-          bordered
-          rowKey={(record) => record.id}
-          dataSource={this.state.list}
-          loading={this.state.loading}
-          pagination={false}
-        >
-          <Column title="序号" dataIndex="id" key="id" width={200} align="center" sorter={(a, b) => a.id - b.id}/>
-          <Column title="标题" dataIndex="title" key="title" width={200} align="center"/>
-          <Column title="作者" dataIndex="author" key="author" width={100} align="center"/>
-          <Column title="阅读量" dataIndex="readings" key="readings" width={195} align="center"/>
-          <Column title="推荐指数" dataIndex="star" key="star" width={195} align="center"/>
-          <Column title="状态" dataIndex="status" key="status" width={195} align="center" render={(status) => {
-            let color =
-              status === "published" ? "green" : status === "deleted" ? "red" : "";
-            return (
-              <Tag color={color} key={status}>
-                {status}
-              </Tag>
-            );
-          }}/>
-          <Column title="时间" dataIndex="date" key="date" width={195} align="center"/>
-          <Column title="操作" key="action" width={195} align="center"render={(text, row) => (
-            <span>
-              <Button type="primary" shape="circle" icon="edit" title="编辑" onClick={this.handleEdit.bind(null,row)}/>
-              <Divider type="vertical" />
-              <Button type="primary" shape="circle" icon="delete" title="删除" onClick={this.handleDelete.bind(null,row)}/>
-            </span>
-          )}/>
-        </Table>
-        <br />
-        <Pagination
-          total={this.state.total}
-          pageSizeOptions={["10", "20", "40"]}
-          showTotal={(total) => `共${total}条数据`}
-          onChange={this.changePage}
-          current={this.state.listQuery.pageNumber}
-          onShowSizeChange={this.changePageSize}
-          showSizeChanger
-          showQuickJumper
-          hideOnSinglePage={true}
-        />
-        <EditForm
-          currentRowData={this.state.currentRowData}
-          wrappedComponentRef={formRef => this.formRef = formRef}
-          visible={this.state.editModalVisible}
-          confirmLoading={this.state.editModalLoading}
-          onCancel={this.handleCancel}
-          onOk={this.handleOk}
-        />  
-      </div>
-    );
-  }
+  return (
+    <div className="app-container">
+      <Collapse defaultActiveKey={["1"]}>
+        <Panel header="筛选" key="1">
+          <Form layout="inline">
+            <Form.Item label="标题:">
+              <Input onChange={filterTitleChange} ref={titleInputRef} allowClear />
+            </Form.Item>
+            <Form.Item label="类型:">
+              <Select ref={statusSelectRef}
+                style={{ width: 120 }}
+                onChange={filterStatusChange} allowClear>
+                <Select.Option value="published">published</Select.Option>
+                <Select.Option value="draft">draft</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item label="推荐指数:">
+              <Select ref={starSelectRef}
+                style={{ width: 120 }}
+                onChange={filterStarChange} allowClear>
+                <Select.Option value={1}>★</Select.Option>
+                <Select.Option value={2}>★★</Select.Option>
+                <Select.Option value={3}>★★★</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item>
+
+              <Button type="primary" onClick={fetchData}>
+                搜索
+              </Button>
+            </Form.Item>
+          </Form>
+        </Panel>
+      </Collapse>
+      <br />
+      <Table
+        bordered
+        rowKey={(record) => record.id}
+        dataSource={state.list}
+        loading={state.loading}
+        pagination={false}
+      >
+        <Column title="序号" dataIndex="id" key="id" width={200} align="center" sorter={(a, b) => a.id - b.id} />
+        <Column title="标题" dataIndex="title" key="title" width={200} align="center" />
+        <Column title="作者" dataIndex="author" key="author" width={100} align="center" />
+        <Column title="阅读量" dataIndex="readings" key="readings" width={195} align="center" />
+        <Column title="推荐指数" dataIndex="star" key="star" width={195} align="center" />
+        <Column title="状态" dataIndex="status" key="status" width={195} align="center" render={(status) => {
+          let color =
+            status === "published" ? "green" : status === "deleted" ? "red" : "";
+          return (
+            <Tag color={color} key={status}>
+              {status}
+            </Tag>
+          );
+        }} />
+        <Column title="时间" dataIndex="date" key="date" width={195} align="center" />
+        <Column title="操作" key="action" width={195} align="center" render={(text, row) => (
+          <span>
+            <Button type="primary" shape="circle" icon={<Icon component={icons["EditOutlined"]} />} title="编辑" onClick={handleEdit.bind(null, row)} />
+            <Divider type="vertical" />
+            <Button type="primary" shape="circle" icon={<Icon component={icons["DeleteOutlined"]} />} title="删除" onClick={handleDelete.bind(null, row)} />
+          </span>
+        )} />
+      </Table>
+      <br />
+      <Pagination
+        total={state.total}
+        pageSizeOptions={["10", "20", "40"]}
+        showTotal={(total) => `共${total}条数据`}
+        onChange={changePage}
+        current={state.listQuery.pageNumber}
+        onShowSizeChange={changePageSize}
+        showSizeChanger
+        showQuickJumper
+        hideOnSinglePage={true}
+      />
+      <EditForm
+        currentRowData={state.currentRowData}
+        wrappedComponentRef={formRef => formRef = formRef}
+        visible={state.editModalVisible}
+        confirmLoading={state.editModalLoading}
+        onCancel={handleCancel}
+        onOk={handleOk}
+      />
+    </div>
+  );
 }
 
 export default TableComponent;

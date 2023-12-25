@@ -1,5 +1,8 @@
-import React, { Component } from "react";
-import { Table, Tag, Form, Icon, Button, Input, message, Collapse } from "antd";
+import React, { useState, useEffect } from "react";
+import { Table, Tag, Form, Button, Input, message, Collapse } from "antd";
+import Icon from '@ant-design/icons'
+import * as icons from '@ant-design/icons';
+
 import { excelList } from "@/api/excel";
 const { Panel } = Collapse;
 const columns = [
@@ -40,122 +43,127 @@ const columns = [
     align: "center",
   },
 ];
-class Zip extends Component {
-  _isMounted = false; // 这个变量是用来标志当前组件是否挂载
-  state = {
+const Zip = (props) => {
+
+  const [isMounted, setMounted] = useState(false);
+  const [state, setState] = useState({
     list: [],
     filename: "file",
     downloadLoading: false,
     selectedRows: [],
     selectedRowKeys: [],
-  };
-  fetchData = () => {
+  });
+
+  const fetchData = () => {
     excelList().then((response) => {
       const list = response.data.data.items;
-      if (this._isMounted) {
-        this.setState({ list });
+      if (isMounted) {
+        setState({ list });
       }
     });
   };
-  componentDidMount() {
-    this._isMounted = true;
-    this.fetchData();
-  }
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-  onSelectChange = (selectedRowKeys, selectedRows) => {
-    this.setState({ selectedRows, selectedRowKeys });
+
+  useEffect(() => {
+    setMounted(true);
+    fetchData();
+    return () => {
+      setMounted(false);
+    };
+  }, []);
+
+  const onSelectChange = (selectedRowKeys, selectedRows) => {
+    setState({ ...state, selectedRows, selectedRowKeys });
   };
-  handleDownload = (type) => {
-    if (type === "selected" && this.state.selectedRowKeys.length === 0) {
+  const handleDownload = (type) => {
+    if (type === "selected" && state.selectedRowKeys.length === 0) {
       message.error("至少选择一项进行导出");
       return;
     }
-    this.setState({
+    setState({
+      ...state,
       downloadLoading: true,
     });
     import("@/lib/Export2Zip").then((zip) => {
       const tHeader = ["Id", "Title", "Author", "Readings", "Date"];
       const filterVal = ["id", "title", "author", "readings", "date"];
-      const list = type === "all" ? this.state.list : this.state.selectedRows;
-      const data = this.formatJson(filterVal, list);
+      const list = type === "all" ? state.list : state.selectedRows;
+      const data = formatJson(filterVal, list);
 
       zip.export_txt_to_zip(
         tHeader,
         data,
-        this.state.filename,
-        this.state.filename
+        state.filename,
+        state.filename
       );
-      this.setState({
+      setState({
+        ...state,
         selectedRowKeys: [], // 导出完成后将多选框清空
         downloadLoading: false,
       });
     });
   };
-  formatJson(filterVal, jsonData) {
+  const formatJson = (filterVal, jsonData) => {
     return jsonData.map((v) => filterVal.map((j) => v[j]));
   }
-  filenameChange = (e) => {
-    this.setState({
+  const filenameChange = (e) => {
+    setState({
+      ...state,
       filename: e.target.value,
     });
   };
-  render() {
-    const { selectedRowKeys } = this.state;
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    };
-    return (
-      <div className="app-container">
-        <Collapse defaultActiveKey={["1"]}>
-          <Panel header="导出选项" key="1">
-            <Form layout="inline">
-              <Form.Item label="文件名:">
-                <Input
-                  style={{ width: "250px" }}
-                  prefix={
-                    <Icon type="file" style={{ color: "rgba(0,0,0,.25)" }} />
-                  }
-                  placeholder="请输入文件名(默认file)"
-                  onChange={this.filenameChange}
-                />
-              </Form.Item>
-              <Form.Item>
-                <Button
-                  type="primary"
-                  icon="file-zip"
-                  onClick={this.handleDownload.bind(null, "all")}
-                >
-                  全部导出
-                </Button>
-              </Form.Item>
-              <Form.Item>
-                <Button
-                  type="primary"
-                  icon="file-zip"
-                  onClick={this.handleDownload.bind(null, "selected")}
-                >
-                  导出已选择项
-                </Button>
-              </Form.Item>
-            </Form>
-          </Panel>
-        </Collapse>
-        <br />
-        <Table
-          bordered
-          columns={columns}
-          rowKey={(record) => record.id}
-          dataSource={this.state.list}
-          pagination={false}
-          rowSelection={rowSelection}
-          loading={this.state.downloadLoading}
-        />
-      </div>
-    );
-  }
+  const { selectedRowKeys } = state;
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+  return (
+    <div className="app-container">
+      <Collapse defaultActiveKey={["1"]}>
+        <Panel header="导出选项" key="1">
+          <Form layout="inline">
+            <Form.Item label="文件名:">
+              <Input
+                style={{ width: "250px" }}
+                prefix={
+                  <Icon component={icons["FileOutlined"]} style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                placeholder="请输入文件名(默认file)"
+                onChange={filenameChange}
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="primary"
+                icon={<Icon component={icons["FileZipOutlined"]} />} 
+                onClick={handleDownload.bind(null, "all")}
+              >
+                全部导出
+              </Button>
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="primary"
+                icon={<Icon component={icons["FileZipOutlined"]} />} 
+                onClick={handleDownload.bind(null, "selected")}
+              >
+                导出已选择项
+              </Button>
+            </Form.Item>
+          </Form>
+        </Panel>
+      </Collapse>
+      <br />
+      <Table
+        bordered
+        columns={columns}
+        rowKey={(record) => record.id}
+        dataSource={state.list}
+        pagination={false}
+        rowSelection={rowSelection}
+        loading={state.downloadLoading}
+      />
+    </div>
+  );
 }
 
 export default Zip;

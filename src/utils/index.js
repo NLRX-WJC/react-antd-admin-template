@@ -46,6 +46,10 @@ export function getMenuItemInMenuListByProperty(menuList, key, value) {
       res = cur;
     }
   }
+
+  // console.log('getMenuItemInMenuListByProperty, key:' + key + ',value:' + value);
+  // console.log('getMenuItemInMenuListByProperty, res:%0' , res);
+
   return res;
 }
 

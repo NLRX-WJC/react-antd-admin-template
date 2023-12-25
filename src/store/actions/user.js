@@ -3,6 +3,7 @@ import { reqUserInfo } from "@/api/user";
 
 export const getUserInfo = (token) => (dispatch) => {
   return new Promise((resolve, reject) => {
+    // console.log("in getUserInfo action")
     reqUserInfo(token)
       .then((response) => {
         const { data } = response;

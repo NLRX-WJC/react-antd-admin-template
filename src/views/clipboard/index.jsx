@@ -1,6 +1,9 @@
 import React from "react";
-import clip from "@/utils/clipboard"; 
+import clip from "@/utils/clipboard";
 import { Button, Row, Col } from "antd";
+
+import Icon from '@ant-design/icons'
+import * as icons from '@ant-design/icons';
 
 const text = `
   我是要被复制的文字，
@@ -36,7 +39,7 @@ const Clipboard = () => {
         <Col span={2}>
           <Button
             type="primary"
-            icon="copy"
+            icon={<Icon component={icons["CopyOutlined"]} />}
             onClick={(e) => {
               handleCopy(text, e);
             }}

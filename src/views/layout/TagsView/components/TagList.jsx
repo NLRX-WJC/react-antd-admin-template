@@ -1,56 +1,84 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { Scrollbars } from "react-custom-scrollbars";
+import React, {useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { useLocation, useNavigate } from "react-router-dom";
+// import withRouter from "@/utils/router";
+// import { Scrollbars } from "react-custom-scrollbars";
 import { Tag } from "antd";
 import { deleteTag, emptyTaglist, closeOtherTags } from "@/store/actions";
-class TagList extends Component {
-  tagListContainer = React.createRef();
-  contextMenuContainer = React.createRef();
-  state = {
+const TagList = () => {
+  const tagListContainer = React.createRef();
+  const contextMenuContainer = React.createRef();
+  // state = {
+  //   left: 0,
+  //   top: 0,
+  //   menuVisible: false,
+  // };
+
+  const [state, setState] = useState({
     left: 0,
     top: 0,
     menuVisible: false,
-  };
-  handleClose = (tag) => {
-    const { history, deleteTag, taglist } = this.props;
+  });
+
+  // 页面初始化时，开始渲染图表
+
+  useEffect(() => {
+    document.body.addEventListener("click", handleClickOutside);
+
+    return () =>{
+      document.body.removeEventListener("click", handleClickOutside);
+    };
+
+  }, []);
+
+
+
+  const globalTagsView = useSelector((state) => state.tagsView);
+  const { taglist } = globalTagsView;
+  const { left, top, menuVisible } = state;
+
+
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const currentPath = location.pathname;
+
+  const handleClose = (tag) => {
+
     const path = tag.path;
-    const currentPath = history.location.pathname;
     const length = taglist.length;
     // 如果关闭的是当前页，跳转到最后一个tag
     if (path === currentPath) {
-      history.push(taglist[length - 1].path);
+      navigate(taglist[length - 1].path);
     }
     // 如果关闭的是最后的tag ,且当前显示的也是最后的tag对应的页面，才做路由跳转
-    if (
-      path === taglist[length - 1].path &&
-      currentPath === taglist[length - 1].path
-    ) {
+    if (  path === taglist[length - 1].path && currentPath === taglist[length - 1].path ) {
       // 因为cutTaglist在最后执行，所以跳转到上一个tags的对应的路由，应该-2
       if (length - 2 > 0) {
-        history.push(taglist[length - 2].path);
+        navigate(taglist[length - 2].path);
       } else if (length === 2) {
-        history.push(taglist[0].path);
+        navigate(taglist[0].path);
       }
     }
 
     // 先跳转路由，再修改state树的taglist
-    deleteTag(tag);
+    dispatch(deleteTag(tag));
   };
-  handleClick = (path) => {
-    this.props.history.push(path);
+  const handleClick = (path) => {
+    navigate(path);
   };
-  openContextMenu = (tag, event) => {
+  const openContextMenu = (tag, event) => {
     event.preventDefault();
     const menuMinWidth = 105;
     const clickX = event.clientX;
     const clickY = event.clientY; //事件发生时鼠标的Y坐标
-    const clientWidth = this.tagListContainer.current.clientWidth; // container width
+    const clientWidth = tagListContainer.current.clientWidth; // container width
     const maxLeft = clientWidth - menuMinWidth; // left boundary
 
     // 当鼠标点击位置大于左侧边界时，说明鼠标点击的位置偏右，将菜单放在左边
     if (clickX > maxLeft) {
-      this.setState({
+      setState({
         left: clickX - menuMinWidth + 15,
         top: clickY,
         menuVisible: true,
@@ -58,7 +86,7 @@ class TagList extends Component {
       });
     } else {
       // 反之，当鼠标点击的位置偏左，将菜单放在右边
-      this.setState({
+      setState({
         left: clickX,
         top: clickY,
         menuVisible: true,
@@ -66,46 +94,44 @@ class TagList extends Component {
       });
     }
   };
-  handleClickOutside = (event) => {
-    const { menuVisible } = this.state;
+  const handleClickOutside = (event) => {
+    const { menuVisible } = state;
     const isOutside = !(
-      this.contextMenuContainer.current &&
-      this.contextMenuContainer.current.contains(event.target)
+      contextMenuContainer.current &&
+      contextMenuContainer.current.contains(event.target)
     );
     if (isOutside && menuVisible) {
-      this.closeContextMenu();
+      closeContextMenu();
     }
   };
-  closeContextMenu() {
-    this.setState({
+  function closeContextMenu() {
+    setState({
+      ...state,
       menuVisible: false,
     });
   }
-  componentDidMount() {
-    document.body.addEventListener("click", this.handleClickOutside);
-  }
-  componentWillUnmount() {
-    document.body.removeEventListener("click", this.handleClickOutside);
-  }
-  handleCloseAllTags = () => {
-    this.props.emptyTaglist();
-    this.props.history.push("/dashboard");
-    this.closeContextMenu();
+  // componentDidMount() {
+  //   document.body.addEventListener("click", this.handleClickOutside);
+  // }
+  // componentWillUnmount() {
+  //   document.body.removeEventListener("click", this.handleClickOutside);
+  // }
+  const handleCloseAllTags = () => {
+    dispatch(emptyTaglist());
+    navigate("/dashboard");
+    closeContextMenu();
   };
-  handleCloseOtherTags = () => {
-    const currentTag = this.state.currentTag;
+  const handleCloseOtherTags = () => {
+    const currentTag = state.currentTag;
     const { path } = currentTag;
-    this.props.closeOtherTags(currentTag)
-    this.props.history.push(path);
-    this.closeContextMenu();
+    dispatch(closeOtherTags(currentTag))
+    navigate(path);
+    closeContextMenu();
   };
-  render() {
-    const { left, top, menuVisible } = this.state;
-    const { taglist, history } = this.props;
-    const currentPath = history.location.pathname;
-    return (
-      <>
-        <Scrollbars
+
+  return (
+    <>
+      {/* <Scrollbars
           autoHide
           autoHideTimeout={1000}
           autoHideDuration={200}
@@ -116,41 +142,35 @@ class TagList extends Component {
           renderTrackVertical={(props) => (
             <div {...props} className="scrollbar-track-vertical" />
           )}
+        > */}
+      <ul className="tags-wrap" ref={tagListContainer}>
+        {taglist.map((tag) => (
+          <li key={tag.path}>
+            <Tag
+              onClose={handleClose.bind(null, tag)}
+              closable={tag.path !== "/dashboard"}
+              color={currentPath === tag.path ? "geekblue" : "gold"}
+              onClick={handleClick.bind(null, tag.path)}
+              onContextMenu={openContextMenu.bind(null, tag)}
+            >
+              {tag.title}
+            </Tag>
+          </li>
+        ))}
+      </ul>
+      {/* </Scrollbars> */}
+      {menuVisible ? (
+        <ul
+          className="contextmenu"
+          style={{ left: `${left}px`, top: `${top}px` }}
+          ref={contextMenuContainer}
         >
-          <ul className="tags-wrap" ref={this.tagListContainer}>
-            {taglist.map((tag) => (
-              <li key={tag.path}>
-                <Tag
-                  onClose={this.handleClose.bind(null, tag)}
-                  closable={tag.path !== "/dashboard"}
-                  color={currentPath === tag.path ? "geekblue" : "gold"}
-                  onClick={this.handleClick.bind(null, tag.path)}
-                  onContextMenu={this.openContextMenu.bind(null, tag)}
-                >
-                  {tag.title}
-                </Tag>
-              </li>
-            ))}
-          </ul>
-        </Scrollbars>
-        {menuVisible ? (
-          <ul
-            className="contextmenu"
-            style={{ left: `${left}px`, top: `${top}px` }}
-            ref={this.contextMenuContainer}
-          >
-            <li onClick={this.handleCloseOtherTags}>关闭其他</li>
-            <li onClick={this.handleCloseAllTags}>关闭所有</li>
-          </ul>
-        ) : null}
-      </>
-    );
-  }
+          <li onClick={handleCloseOtherTags}>关闭其他</li>
+          <li onClick={handleCloseAllTags}>关闭所有</li>
+        </ul>
+      ) : null}
+    </>
+  );
 }
-export default withRouter(
-  connect((state) => state.tagsView, {
-    deleteTag,
-    emptyTaglist,
-    closeOtherTags,
-  })(TagList)
-);
+
+export default TagList;

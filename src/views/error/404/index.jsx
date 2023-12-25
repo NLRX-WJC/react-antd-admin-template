@@ -1,11 +1,14 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom'
 import { Button, Row, Col } from "antd";
 import errImg from "@/assets/images/404.png";
 import "./index.less";
 
 const NotFound = (props) => {
-  const { history } = props;
-  const goHome = () => history.replace("/");
+
+  const navigate = useNavigate()
+
+  const goHome = () => navigate("/");
   return (
     <Row className="not-found">
       <Col span={12}>

@@ -1,6 +1,10 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { Breadcrumb } from "antd";
+
+
+import routeList from "@/config/routeMap";
+
 import menuList from "@/config/menuConfig";
 import "./index.less";
 /**
@@ -36,16 +40,43 @@ const getPath = (menuList, pathname) => {
 };
 
 const BreadCrumb = (props) => {
-  const { location } = props;
+  const location = useLocation();
   const { pathname } = location;
   let path = getPath(menuList, pathname);
+
   const first = path && path[0];
   if (first && first.title.trim() !== "首页") {
     path = [{ title: "首页", path: "/dashboard" }].concat(path);
   }
+
+  // console.log('BreadCrumb path:%0, pathname:%0', path, pathname);
+
+  const isInRouteList = (route) => {
+
+    let res = routeList.filter((item) => item.path === route.path);
+
+    return res.length > 0
+
+  }
+
+  function itemRender(route, params, routes, paths) {
+    // const last = items.indexOf(item) === items.length - 1;
+
+    // console.log('Breadcrumb itemRender route:%0', route)
+    // console.log('Breadcrumb itemRender routes:%0', routes)
+    // console.log('Breadcrumb itemRender paths:%0', paths)
+    // return <Link to={paths.join('/')}>{item.title}</Link>;
+
+    // let item = items[items.length - 1];
+
+    return isInRouteList(route) ? <Link to={route.path}>{route.title}</Link> : <span>{route.title}</span>;
+
+
+  }
+
   return (
     <div className="Breadcrumb-container">
-      <Breadcrumb>
+      {/* <Breadcrumb>
         {path &&
           path.map((item) =>
             item.title === "首页" ? (
@@ -56,9 +87,14 @@ const BreadCrumb = (props) => {
               <Breadcrumb.Item key={item.path}>{item.title}</Breadcrumb.Item>
             )
           )}
-      </Breadcrumb>
+      </Breadcrumb> */}
+
+      <Breadcrumb items={path} itemRender={itemRender} />
+
     </div>
   );
 };
 
-export default withRouter(BreadCrumb);
+// export default withRouter(BreadCrumb);
+
+export default BreadCrumb;

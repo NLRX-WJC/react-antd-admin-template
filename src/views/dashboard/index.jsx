@@ -9,6 +9,9 @@ import PieChart from "./components/PieChart";
 import TransactionTable from "./components/TransactionTable";
 import BoxCard from "./components/BoxCard";
 
+
+import LineBarChart from "./components/LineBarChart";
+
 const lineChartDefaultData = {
   "New Visits": {
     expectedData: [100, 120, 161, 134, 105, 160, 165],
@@ -33,7 +36,9 @@ const Dashboard = () => {
     lineChartDefaultData["New Visits"]
   );
 
-  const handleSetLineChartData = (type) => setLineChartData(lineChartDefaultData[type]);
+  const handleSetLineChartData = (type) => {
+    setLineChartData(lineChartDefaultData[type]);
+  }
 
   return (
     <div className="app-container">
@@ -55,6 +60,13 @@ const Dashboard = () => {
         }}
       />
 
+
+      <LineBarChart styles={{
+          padding: 12,
+          backgroundColor: "#fff",
+          marginBottom: "25px",
+        }}/>
+
       <Row gutter={32}>
         <Col xs={24} sm={24} lg={8}>
           <div className="chart-wrapper">
@@ -62,7 +74,7 @@ const Dashboard = () => {
           </div>
         </Col>
         <Col xs={24} sm={24} lg={8}>
-          <div className="chart-wrapper">
+          <div className="chart-wrapper"> 
             <PieChart />
           </div>
         </Col>
@@ -71,6 +83,7 @@ const Dashboard = () => {
             <BarChart />
           </div>
         </Col>
+
       </Row>
 
       <Row gutter={8}>

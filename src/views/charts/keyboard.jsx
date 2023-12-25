@@ -1,42 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import echarts from "@/lib/echarts";
-import { debounce } from "@/utils";
-class KeyboardChart extends Component {
-  state = {
-    chart: null,
-  };
+import React from "react";
+import Chart from "@/components/Chart";
+import { PropTypes } from "prop-types";
 
-  componentDidMount() {
-    debounce(this.initChart.bind(this), 300)();
-    window.addEventListener("resize", () => this.resize());
-  }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.sidebarCollapsed !== this.props.sidebarCollapsed) {
-      this.resize();
-    }
-  }
-
-  componentWillUnmount() {
-    this.dispose();
-  }
-
-  resize() {
-    const chart = this.state.chart;
-    if (chart) {
-      debounce(chart.resize.bind(this), 300)();
-    }
-  }
-
-  dispose() {
-    if (!this.state.chart) {
-      return;
-    }
-    window.removeEventListener("resize", () => this.resize()); // 移除窗口，变化时重置图表
-    this.setState({ chart: null });
-  }
-
-  setOptions() {
+const KeyboardChart = (props) => {
+  
     const xAxisData = [];
     const data = [];
     const data2 = [];
@@ -45,7 +12,7 @@ class KeyboardChart extends Component {
       data.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
       data2.push((Math.sin(i / 5) * (i / 5 + 10) + i / 6) * 3);
     }
-    this.state.chart.setOption({
+    const options = {
       backgroundColor: "#08263a",
       grid: {
         left: "5%",
@@ -103,12 +70,12 @@ class KeyboardChart extends Component {
           data: data2,
           z: 1,
           itemStyle: {
-            normal: {
+            
               opacity: 0.4,
               barBorderRadius: 5,
               shadowBlur: 3,
               shadowColor: "#111",
-            },
+            
           },
         },
         {
@@ -121,16 +88,16 @@ class KeyboardChart extends Component {
           animationEasing: "linear",
           animationDuration: 1200,
           lineStyle: {
-            normal: {
+            
               color: "transparent",
-            },
+            
           },
           areaStyle: {
-            normal: {
+            
               color: "#08263a",
               shadowBlur: 50,
               shadowColor: "#000",
-            },
+            
           },
         },
         {
@@ -140,9 +107,9 @@ class KeyboardChart extends Component {
           xAxisIndex: 1,
           z: 3,
           itemStyle: {
-            normal: {
+            
               barBorderRadius: 5,
-            },
+            
           },
         },
       ],
@@ -154,28 +121,22 @@ class KeyboardChart extends Component {
       animationDelayUpdate(idx) {
         return idx * 20;
       },
-    });
-  }
+    };
+ 
 
-  initChart() {
-    if (!this.el) return;
-    this.setState({ chart: echarts.init(this.el, "macarons") }, () => {
-      this.setOptions();
-    });
-  }
-  render() {
-    return (
+  return (
+    <div
+      style={{ width: "100%", height: "calc(100vh - 100px)" }}
+      className="app-container"
+    >
       <div
-        style={{ width: "100%", height: "calc(100vh - 100px)" }}
-        className="app-container"
-      >
-        <div
-          style={{ width: "100%", height: "100%" }}
-          ref={(el) => (this.el = el)}
-        ></div>
+        style={{ width: "100%", height: "100%" }}
+      >      
+       <Chart options = {options}/>
+      
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default connect((state) => state.app)(KeyboardChart);
+export default KeyboardChart;

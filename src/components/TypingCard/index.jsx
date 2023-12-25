@@ -6,8 +6,8 @@ import Typing from "@/utils/typing";
 const TypingCard = (props) => {
   const { title, source } = props;
 
-  const sourceEl = useRef();
-  const outputEl = useRef();
+  const sourceEl = useRef(null);
+  const outputEl = useRef(null);
 
   useEffect(() => {
     const typing = new Typing({

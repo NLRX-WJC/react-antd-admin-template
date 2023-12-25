@@ -30,6 +30,7 @@ const users = {
 
 export default {
   login: (config) => {
+    console.log("in mock login");
     const { username } = JSON.parse(config.body);
     const token = tokens[username];
     if (!token) {
