@@ -1,7 +1,7 @@
 import React from "react";
-import { Redirect, withRouter, Route, Switch } from "react-router-dom";
+import { useLocation, Route, Routes, Navigate, useRoutes, Outlet } from "react-router-dom";
+import { useSelector } from 'react-redux'
 import DocumentTitle from "react-document-title";
-import { connect } from "react-redux";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Layout } from "antd";
 import { getMenuItemInMenuListByProperty } from "@/utils";
@@ -19,14 +19,31 @@ const getPageTitle = (menuList, pathname) => {
 };
 
 const LayoutContent = (props) => {
-  const { role, location } = props;
+
+
+  const location = useLocation();
+  const userState = useSelector(state => state.user);
+
+  const { role } = userState;
+
+  // console.log(`LayoutContent role:${role}`)
+
   const { pathname } = location;
   const handleFilter = (route) => {
     // 过滤没有权限的页面
-    return role === "admin" || !route.roles || route.roles.includes(role);
+    let result = role === "admin" || !route.roles || route.roles.includes(role);
+    // console.log(`location:${pathname},role:${role},handleFilter for ${route.path}, result:${result}`)
+    return result;
   };
+
+
+
   return (
-    <DocumentTitle title={getPageTitle(menuList, pathname)}>
+
+    <Outlet />
+  );
+
+  {/*<DocumentTitle title={getPageTitle(menuList, pathname)}>
       <Content style={{ height: "calc(100% - 100px)" }}>
         <TransitionGroup>
           <CSSTransition
@@ -34,27 +51,32 @@ const LayoutContent = (props) => {
             timeout={500}
             classNames="fade"
             exit={false}
-          >
-            <Switch location={location}>
-              <Redirect exact from="/" to="/dashboard" />
-              {routeList.map((route) => {
-                return (
-                  handleFilter(route) && (
-                    <Route
-                      component={route.component}
-                      key={route.path}
-                      path={route.path}
-                    />
-                  )
-                );
-              })}
-              <Redirect to="/error/404" />
-            </Switch>
-          </CSSTransition>
+          >*/}
+  {
+    /* <Routes location={location}>
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            {routeList.map((route) => {
+              return (
+                handleFilter(route) ? (
+                  <Route
+                    element={route.component}
+                    key={route.path}
+                    path={route.path}
+                  />
+                ) : null
+              );
+            })}
+            <Route path="*" element={<Navigate to="/error/404" replace />} />
+          </Routes> */
+  }
+
+
+  {/* </CSSTransition>
         </TransitionGroup>
-      </Content>
-    </DocumentTitle>
-  );
+      </Content> */}
+  {/* </DocumentTitle> */ }
+
+
 };
 
-export default connect((state) => state.user)(withRouter(LayoutContent));
+export default LayoutContent;

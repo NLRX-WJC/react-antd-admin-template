@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Tag } from "antd";
 import { transactionList } from "@/api/remoteSearch";
 
@@ -29,35 +29,32 @@ const columns = [
   },
 ];
 
-class TransactionTable extends Component {
-  _isMounted = false;   // 这个变量是用来标志当前组件是否挂载
-  state = {
+const TransactionTable = (props) => {
+
+  const [state, setState] = useState({
     list: [],
-  };
-  fetchData = () => {
+  });
+
+
+  const fetchData = () => {
     transactionList().then((response) => {
       const list = response.data.data.items.slice(0, 13);
-      if (this._isMounted) { 
-        this.setState({ list });
-      }
+      setState({ list });
     });
   };
-  componentDidMount() {
-    this._isMounted = true;
-    this.fetchData();
-  }
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-  render() {
-    return (
-      <Table
-        columns={columns}
-        dataSource={this.state.list}
-        pagination={false}
-      />
-    );
-  }
+
+  useEffect(() => {
+    fetchData();
+
+  }, []);
+
+  return (
+    <Table
+      columns={columns}
+      dataSource={state.list}
+      pagination={false}
+    />
+  );
 }
 
 export default TransactionTable;

@@ -1,5 +1,6 @@
 /* eslint-disable */
-require('script-loader!file-saver');
+// require('script-loader!file-saver');
+new URL('script-loader!file-saver/dist/FileSave.min.js', import.meta.url).href;
 import JSZip from 'jszip'
 
 export function export_txt_to_zip(th, jsonData, txtName, zipName) {

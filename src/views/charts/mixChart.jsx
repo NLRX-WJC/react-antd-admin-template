@@ -1,42 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import echarts from "@/lib/echarts";
-import { debounce } from "@/utils";
-class MixChart extends Component {
-  state = {
-    chart: null,
-  };
+import React from "react";
+import Chart from "@/components/Chart";
+import { PropTypes } from "prop-types";
 
-  componentDidMount() {
-    debounce(this.initChart.bind(this), 300)();
-    window.addEventListener("resize", () => this.resize());
-  }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.sidebarCollapsed !== this.props.sidebarCollapsed) {
-      this.resize();
-    }
-  }
+const MixChart = (props) => {
 
-  componentWillUnmount() {
-    this.dispose();
-  }
 
-  resize() {
-    const chart = this.state.chart;
-    if (chart) {
-      debounce(chart.resize.bind(this), 300)();
-    }
-  }
-
-  dispose() {
-    if (!this.state.chart) {
-      return;
-    }
-    window.removeEventListener("resize", () => this.resize()); // 移除窗口，变化时重置图表
-    this.setState({ chart: null });
-  }
-
-  setOptions() {
     const xData = (function () {
       const data = [];
       for (let i = 1; i < 13; i++) {
@@ -44,7 +12,9 @@ class MixChart extends Component {
       }
       return data;
     })();
-    this.state.chart.setOption({
+
+
+    const options = {
       backgroundColor: "#344b58",
       title: {
         text: "statistics",
@@ -166,7 +136,7 @@ class MixChart extends Component {
           barMaxWidth: 35,
           barGap: "10%",
           itemStyle: {
-            normal: {
+            
               color: "rgba(255,144,128,1)",
               label: {
                 show: true,
@@ -178,7 +148,7 @@ class MixChart extends Component {
                   return p.value > 0 ? p.value : "";
                 },
               },
-            },
+            
           },
           data: [
             709,
@@ -201,7 +171,7 @@ class MixChart extends Component {
           type: "bar",
           stack: "total",
           itemStyle: {
-            normal: {
+            
               color: "rgba(0,191,183,1)",
               barBorderRadius: 0,
               label: {
@@ -211,7 +181,7 @@ class MixChart extends Component {
                   return p.value > 0 ? p.value : "";
                 },
               },
-            },
+            
           },
           data: [
             327,
@@ -235,7 +205,7 @@ class MixChart extends Component {
           symbolSize: 10,
           symbol: "circle",
           itemStyle: {
-            normal: {
+            
               color: "rgba(252,230,48,1)",
               barBorderRadius: 0,
               label: {
@@ -245,7 +215,7 @@ class MixChart extends Component {
                   return p.value > 0 ? p.value : "";
                 },
               },
-            },
+            
           },
           data: [
             1036,
@@ -263,28 +233,21 @@ class MixChart extends Component {
           ],
         },
       ],
-    });
-  }
+    };
+  
 
-  initChart() {
-    if (!this.el) return;
-    this.setState({ chart: echarts.init(this.el, "macarons") }, () => {
-      this.setOptions();
-    });
-  }
-  render() {
-    return (
+  return (
+    <div
+      style={{ width: "100%", height: "calc(100vh - 100px)" }}
+      className="app-container"
+    >
       <div
-        style={{ width: "100%", height: "calc(100vh - 100px)" }}
-        className="app-container"
+        style={{ width: "100%", height: "100%" }}
       >
-        <div
-          style={{ width: "100%", height: "100%" }}
-          ref={(el) => (this.el = el)}
-        ></div>
+         <Chart options = {options}/>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default connect((state) => state.app)(MixChart);
+export default MixChart;

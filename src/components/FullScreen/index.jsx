@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import screenfull from "screenfull";
-import { Icon, message, Tooltip } from "antd";
+import { message, Tooltip } from "antd";
+import Icon from '@ant-design/icons'
+import * as icons from '@ant-design/icons';
+
 import "./index.less";
 
 const click = () => {
@@ -26,11 +29,11 @@ const FullScreen = () => {
   }, []);
 
   const title = isFullscreen ? "取消全屏" : "全屏";
-  const type = isFullscreen ? "fullscreen-exit" : "fullscreen";
+  const type = isFullscreen ? "FullscreenExitOutlined" : "FullscreenOutlined";
   return (
     <div className="fullScreen-container">
       <Tooltip placement="bottom" title={title}>
-        <Icon type={type} onClick={click} />
+        <Icon component={icons[type]} onClick={click} />
       </Tooltip>
     </div>
   );

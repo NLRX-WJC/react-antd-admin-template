@@ -1,36 +1,37 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Table } from "antd";
 import UploadExcelComponent from "@/components/UploadExcel";
-class UploadExcel extends Component {
-  state = {
+const UploadExcel = (props) => {
+
+  const [state, setState] = useState({
     tableData: [],
     tableHeader: [],
-  };
-  handleSuccess = ({ results, header }) => {
-    this.setState({
+  });
+
+  const handleSuccess = ({ results, header }) => {
+    setState({
+      ...state,
       tableData: results,
       tableHeader: header,
     });
   };
-  render() {
-    return (
-      <div className="app-container">
-        <UploadExcelComponent uploadSuccess={this.handleSuccess} />
-        <br />
-        <Table
-          bordered
-          columns={this.state.tableHeader.map((item) => ({
-            title: item,
-            dataIndex: item,
-            key: item,
-            width: 195,
-            align: "center",
-          }))}
-          dataSource={this.state.tableData}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="app-container">
+      <UploadExcelComponent uploadSuccess={handleSuccess} />
+      <br />
+      <Table
+        bordered
+        columns={state.tableHeader.map((item) => ({
+          title: item,
+          dataIndex: item,
+          key: item,
+          width: 195,
+          align: "center",
+        }))}
+        dataSource={state.tableData}
+      />
+    </div>
+  );
 }
 
 export default UploadExcel;

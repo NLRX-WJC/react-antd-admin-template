@@ -1,7 +1,26 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { PropTypes } from "prop-types";
-import { Upload, Icon, message } from "antd";
-import XLSX from "xlsx";
+import { Upload, message } from "antd";
+import Icon from '@ant-design/icons'
+import * as icons from '@ant-design/icons';
+
+import * as XLSX from "xlsx";
+
+// import * as XLSX from 'xlsx';
+
+// /* load 'fs' for readFile and writeFile support */
+// import * as fs from 'fs';
+// XLSX.set_fs(fs);
+
+// /* load 'stream' for stream support */
+// import { Readable } from 'stream';
+// XLSX.stream.set_readable(Readable);
+
+// /* load the codepage support library for extended support with older formats  */
+// import * as cpexcel from 'xlsx/dist/cpexcel.full.mjs';
+// XLSX.set_cptable(cpexcel);
+
+
 const { Dragger } = Upload;
 
 const getHeaderRow = (sheet) => {
@@ -23,19 +42,19 @@ const getHeaderRow = (sheet) => {
 const isExcel = (file) => {
   return /\.(xlsx|xls|csv)$/.test(file.name);
 };
-class UploadExcel extends Component {
-  static propTypes = {
-    uploadSuccess: PropTypes.func.isRequired,
-  };
-  state = {
+
+const UploadExcel = (props) => {
+
+  const [state, setState] = useState({
     loading: false,
     excelData: {
       header: null,
       results: null,
     },
-  };
-  draggerProps = () => {
-    let _this = this;
+  });
+
+
+  const draggerProps = () => {
     return {
       name: "file",
       multiple: false,
@@ -55,13 +74,13 @@ class UploadExcel extends Component {
         }
       },
       customRequest(e) {
-        _this.readerData(e.file).then(() => {
+        readerData(e.file).then(() => {
           e.onSuccess();
         });
       }
     };
   };
-  readerData = (rawFile) => {
+  const readerData = (rawFile) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -71,32 +90,34 @@ class UploadExcel extends Component {
         const worksheet = workbook.Sheets[firstSheetName];
         const header = getHeaderRow(worksheet);
         const results = XLSX.utils.sheet_to_json(worksheet);
-        this.generateData({ header, results });
+        generateData({ header, results });
         resolve();
       };
       reader.readAsArrayBuffer(rawFile);
     });
   };
-  generateData = ({ header, results }) => {
-    this.setState({
+  const generateData = ({ header, results }) => {
+    setState({
       excelData: { header, results },
     });
-    this.props.uploadSuccess && this.props.uploadSuccess(this.state.excelData);
+    props.uploadSuccess && props.uploadSuccess(state.excelData);
   };
-  render() {
-    return (
-      <div>
-        <Dragger {...this.draggerProps()}>
-          <p className="ant-upload-drag-icon">
-            <Icon type="inbox" />
-          </p>
-          <p className="ant-upload-text">
-            Click or drag file to this area to upload
-          </p>
-        </Dragger>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Dragger {...draggerProps()}>
+        <p className="ant-upload-drag-icon">
+          <Icon component={icons["InboxOutlined"]} />
+        </p>
+        <p className="ant-upload-text">
+          Click or drag file to this area to upload
+        </p>
+      </Dragger>
+    </div>
+  );
 }
+
+UploadExcel.propTypes = {
+  uploadSuccess: PropTypes.func.isRequired,
+};
 
 export default UploadExcel;

@@ -1,6 +1,7 @@
 /* eslint-disable */
-require('script-loader!file-saver');
-import XLSX from 'xlsx'
+// require('script-loader!file-saver');
+new URL('script-loader!file-saver/dist/FileSave.min.js', import.meta.url).href;
+import * as XLSX from 'xlsx';
 
 function generateArray(table) {
   var out = [];

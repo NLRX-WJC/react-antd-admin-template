@@ -1,26 +1,45 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Icon, Menu, Dropdown, Modal, Layout, Avatar } from "antd";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Menu, Dropdown, Modal, Layout, Avatar } from "antd";
+import Icon from '@ant-design/icons'
+import * as icons from '@ant-design/icons';
+
 import { Link } from "react-router-dom";
 import { logout, getUserInfo } from "@/store/actions";
 import FullScreen from "@/components/FullScreen";
 import Settings from "@/components/Settings";
 import Hamburger from "@/components/Hamburger";
 import BreadCrumb from "@/components/BreadCrumb";
+
+
 import "./index.less";
 const { Header } = Layout;
 
 const LayoutHeader = (props) => {
+
+  const dispatch = useDispatch();
+
+  const state = {
+    ...useSelector(state => state.app),
+    ...useSelector(state => state.user),
+    ...useSelector(state => state.settings),
+  };
+
+
   const {
     token,
     avatar,
     sidebarCollapsed,
-    logout,
-    getUserInfo,
     showSettings,
     fixedHeader,
-  } = props;
-  token && getUserInfo(token);
+  } = state;
+
+  useEffect(() => {
+    dispatch(getUserInfo(token));
+  }, [token]);
+
+
+  // token && dispatch(getUserInfo(token));
   const handleLogout = (token) => {
     Modal.confirm({
       title: "注销",
@@ -28,7 +47,7 @@ const LayoutHeader = (props) => {
       okText: "确定",
       cancelText: "取消",
       onOk: () => {
-        logout(token);
+        dispatch(logout(token));
       },
     });
   };
@@ -93,10 +112,10 @@ const LayoutHeader = (props) => {
           <FullScreen />
           {showSettings ? <Settings /> : null}
           <div className="dropdown-wrap">
-            <Dropdown overlay={menu}>
+            <Dropdown menu={menu}>
               <div>
                 <Avatar shape="square" size="medium" src={avatar} />
-                <Icon style={{ color: "rgba(0,0,0,.3)" }} type="caret-down" />
+                <Icon component={icons["CaretDownOutlined"]} style={{ color: "rgba(0,0,0,.3)" }} />
               </div>
             </Dropdown>
           </div>
@@ -106,11 +125,4 @@ const LayoutHeader = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    ...state.app,
-    ...state.user,
-    ...state.settings,
-  };
-};
-export default connect(mapStateToProps, { logout, getUserInfo })(LayoutHeader);
+export default LayoutHeader;

@@ -1,36 +1,55 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { Drawer, Switch, Row, Col, Divider, Alert, Icon, Button } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { Drawer, Switch, Row, Col, Divider, Alert, Button } from "antd";
+import Icon from '@ant-design/icons'
+import * as icons from '@ant-design/icons';
+
 import { toggleSettingPanel, changeSetting } from "@/store/actions";
 import clip from "@/utils/clipboard";
 
 const RightPanel = (props) => {
+
+  const state = {
+    ...useSelector(state => state.app),
+    ...useSelector(state => state.settings),
+  };
+
+
   const {
     settingPanelVisible,
-    toggleSettingPanel,
-    changeSetting,
     sidebarLogo: defaultSidebarLogo,
     fixedHeader: defaultFixedHeader,
     tagsView: defaultTagsView,
-  } = props;
+  } = state;
+
+  const dispatch = useDispatch();
 
   const [sidebarLogo, setSidebarLogo] = useState(defaultSidebarLogo);
   const [fixedHeader, setFixedHeader] = useState(defaultFixedHeader);
   const [tagsView, setTagsView] = useState(defaultTagsView);
 
+
+  const handleToggleSettingPanel = () => {
+    dispatch(toggleSettingPanel())
+  };
+
+  const handleChangeSetting = (setting) => {
+    dispatch(changeSetting(setting))
+  }
+
   const sidebarLogoChange = (checked) => {
     setSidebarLogo(checked);
-    changeSetting({ key: "sidebarLogo", value: checked });
+    handleChangeSetting({ key: "sidebarLogo", value: checked });
   };
 
   const fixedHeaderChange = (checked) => {
     setFixedHeader(checked);
-    changeSetting({ key: "fixedHeader", value: checked });
+    handleChangeSetting({ key: "fixedHeader", value: checked });
   };
 
   const tagsViewChange = (checked) => {
     setTagsView(checked);
-    changeSetting({ key: "tagsView", value: checked });
+    handleChangeSetting({ key: "tagsView", value: checked });
   };
 
   const handleCopy = (e) => {
@@ -51,8 +70,8 @@ const RightPanel = (props) => {
         title="系统设置"
         placement="right"
         width={350}
-        onClose={toggleSettingPanel}
-        visible={settingPanelVisible}
+        onClose={handleToggleSettingPanel}
+        open={settingPanelVisible}
       >
         <Row>
           <Col span={12}>
@@ -103,10 +122,10 @@ const RightPanel = (props) => {
               description="配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改/src/defaultSettings.js配置文件"
               type="warning"
               showIcon
-              icon={<Icon type="notification" />}
+              icon={<Icon component={icons["NotificationOutlined"]} />}
               style={{ marginBottom: "16px" }}
             />
-            <Button style={{ width: "100%" }} icon="copy" onClick={handleCopy}>
+            <Button style={{ width: "100%" }} icon={<Icon component={icons["CopyOutlined"]} />} onClick={handleCopy}>
               拷贝配置
             </Button>
           </Col>
@@ -116,13 +135,6 @@ const RightPanel = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    ...state.app,
-    ...state.settings,
-  };
-};
 
-export default connect(mapStateToProps, { toggleSettingPanel, changeSetting })(
-  RightPanel
-);
+
+export default RightPanel;
